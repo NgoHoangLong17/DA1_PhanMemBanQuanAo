@@ -140,7 +140,6 @@ public class mainJFrame extends javax.swing.JFrame {
         lblDongHo.setForeground(new java.awt.Color(255, 255, 0));
         lblDongHo.setText("12:00:00 PM");
 
-        lblThoat.setIcon(new javax.swing.ImageIcon("C:\\Data\\Nhom3_QuanLyBanQuanAo\\nhom3quanlybanquanao\\src\\main\\resources\\com\\poly\\it17326\\group3\\icon\\icons8-macos-close-30.png")); // NOI18N
         lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -148,7 +147,6 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Data\\Nhom3_QuanLyBanQuanAo\\nhom3quanlybanquanao\\src\\main\\resources\\com\\poly\\it17326\\group3\\icon\\icons8-macos-minimize-30.png")); // NOI18N
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -202,6 +200,9 @@ public class mainJFrame extends javax.swing.JFrame {
 
         btnLichSuGD.setText("Lịch sử giao dịch");
         btnLichSuGD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLichSuGDMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnLichSuGDMouseEntered(evt);
             }
@@ -563,6 +564,11 @@ public class mainJFrame extends javax.swing.JFrame {
         chiTietSpJpanel.initWebcam();
 
     }//GEN-LAST:event_btnQuanLySPActionPerformed
+
+    private void btnLichSuGDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLichSuGDMouseClicked
+        // TODO add your handling code here:
+        showPanel(new LichSuGiaoDichJPanel());
+    }//GEN-LAST:event_btnLichSuGDMouseClicked
 
     /**
      * @param args the command line arguments

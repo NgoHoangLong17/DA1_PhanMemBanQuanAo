@@ -51,4 +51,9 @@ public class HoaDonServiceImpl implements ViewHoaDonService {
     public HoaDon getOneByMaHD(String maHoaDon) {
         return hoaDonReposity.getOneByMaHD(maHoaDon);
     }
+
+    @Override
+    public List<HoaDon> getHdWhere(int tt, int id) {
+        return hoaDonReposity.getHdWhere(tt, id);
+    }
 }

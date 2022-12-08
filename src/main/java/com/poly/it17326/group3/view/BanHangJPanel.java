@@ -142,7 +142,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         int i = 1;
         for (ChiTietSp chiTietSp : list) {
             tableModel.addRow(new Object[]{
-                i, chiTietSp.getId(), chiTietSp.getSanPham().getTen(),
+                i, chiTietSp.getMactsp(), chiTietSp.getSanPham().getTen(),
                 chiTietSp.getDongSp().getTen(), chiTietSp.getMauSac().getTen(),
                 chiTietSp.getChatLieu().getTen(), chiTietSp.getSize().getTen(),
                 chiTietSp.getSoLuongTon(), chiTietSp.getGia(), chiTietSp.getMoTa()
@@ -176,7 +176,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         int i = 1;
         for (HoaDonChiTiet hdct : list) {
             tableModel.addRow(new Object[]{
-                i, hdct.getId(), hdct.getChiTietSp().getSanPham().getTen(),
+                i, hdct.getChiTietSp().getMactsp(), hdct.getChiTietSp().getSanPham().getTen(),
                 hdct.getChiTietSp().getDongSp().getTen(), hdct.getChiTietSp().getMauSac().getTen(),
                 hdct.getChiTietSp().getChatLieu().getTen(),
                 hdct.getChiTietSp().getSize().getTen(), hdct.getSoLuong(), hdct.getDONGIA(), hdct.getSoLuong() * hdct.getDONGIA()});
@@ -259,10 +259,10 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
                 txtTimKiem.setText(result.getText());
                 if (lblMaHD.getText().equals("")) {
                     taoHd();
-                    themVaoGioHangQR(Integer.parseInt(result.getText()));
+                    themVaoGioHangQR(result.getText());
 
                 } else {
-                    themVaoGioHangQR(Integer.parseInt(result.getText()));
+                    themVaoGioHangQR(result.getText());
                 }
                 lblThanhTien.setText(getThanhTien() + " đ");
             }
@@ -276,41 +276,49 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         return t;
     }
 
-    private void themVaoGioHangQR(int idCtsp) {
-
-        ChiTietSp ctsp = chiTietSPService.getOne(idCtsp);
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        hdct.setHoaDon(hoaDonService.getOne(getIdHd()));
-        hdct.setChiTietSp(ctsp);
-        int sl = inputSoLuong();
-        if (sl <= 0) {
-            JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
-            loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
-            return;
+    private void themVaoGioHangQR(String maCtsp) {
+        boolean check = true;
+        for (HoaDonChiTiet hdct : hoaDonChiTietService.getHdctByIdHD(getIdHd())) {
+            if (hdct.getChiTietSp().getMactsp().equals(maCtsp)) {
+                check = false;
+            }
         }
-        hdct.setSoLuong(sl);
-        hdct.setDONGIA(ctsp.getGia());
-        hoaDonChiTietService.save(hdct);
-        loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
-    }
-
-    private void themVaoGioHang() {
-        int row = tblHoaDon.getSelectedRow();
-        int idCtsp = Integer.parseInt(tblCtsp.getValueAt(tblCtsp.getSelectedRow(), 1).toString());
-        ChiTietSp ctsp = chiTietSPService.getOne(idCtsp);
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        hdct.setHoaDon(hoaDonService.getOne(getIdHd()));
-        hdct.setChiTietSp(ctsp);
-        int sl = inputSoLuong();
-        if (sl <= 0) {
-            JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
+        if (check) {
+            ChiTietSp ctsp = chiTietSPService.getOneByMaCtsp(maCtsp);
+            HoaDonChiTiet hdct = new HoaDonChiTiet();
+            hdct.setHoaDon(hoaDonService.getOne(getIdHd()));
+            hdct.setChiTietSp(ctsp);
+            int sl = inputSoLuong();
+            if (sl <= 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
+                loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+                return;
+            }
+            hdct.setSoLuong(sl);
+            hdct.setDONGIA(ctsp.getGia());
+            hoaDonChiTietService.save(hdct);
             loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
-            return;
+        } else {
+            ChiTietSp ctsp = chiTietSPService.getOneByMaCtsp(maCtsp);
+            HoaDonChiTiet hdct = hoaDonChiTietService.getHdctByIdCtspAndIdHd(ctsp.getId(), getIdHd());
+            int soL = inputSoLuong();
+            if (soL < 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
+                loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+                return;
+            }
+            if (soL == 0) {
+                hdct.setSoLuong(soL);
+                hoaDonChiTietService.delete(hdct);
+                loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+            } else {
+                hdct.setSoLuong(soL);
+                hoaDonChiTietService.update(hdct);
+                loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+            }
+
         }
-        hdct.setSoLuong(sl);
-        hdct.setDONGIA(ctsp.getGia());
-        hoaDonChiTietService.save(hdct);
-        loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+
     }
 
     private int getIdHd() {
@@ -892,12 +900,15 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
     private void tblCtspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCtspMouseClicked
         // TODO add your handling code here:
+        String maCtsp = tblCtsp.getValueAt(tblCtsp.getSelectedRow(), 1).toString();
+        txtTimKiem.setText(maCtsp);
+
         if (lblMaHD.getText().equals("")) {
             taoHd();
-            themVaoGioHang();
+            themVaoGioHangQR(maCtsp);
 
         } else {
-            themVaoGioHang();
+            themVaoGioHangQR(maCtsp);
         }
         lblThanhTien.setText(getThanhTien() + " đ");
 
@@ -915,8 +926,8 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
     private void tblHdctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHdctMouseClicked
         // TODO add your handling code here:
         int row = tblHdct.getSelectedRow();
-        int idhdct = Integer.parseInt(tblHdct.getValueAt(row, 1).toString());
-        HoaDonChiTiet hdct = hoaDonChiTietService.getOne(idhdct);
+        String maCtsp = tblHdct.getValueAt(row, 1).toString();
+        HoaDonChiTiet hdct = hoaDonChiTietService.getHdctByIdCtspAndIdHd(chiTietSPService.getOneByMaCtsp(maCtsp).getId(), getIdHd());
         int sl = inputSoLuong();
         if (sl < 0) {
             JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
@@ -925,9 +936,12 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         hdct.setSoLuong(sl);
         if (hdct.getSoLuong() == 0) {
             hoaDonChiTietService.delete(hdct);
+            loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+        } else {
+            hoaDonChiTietService.update(hdct);
+            loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+            
         }
-        hoaDonChiTietService.update(hdct);
-        loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
         lblThanhTien.setText(getThanhTien() + " đ");
     }//GEN-LAST:event_tblHdctMouseClicked
 
@@ -943,6 +957,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
             }
         } catch (Exception e) {
         }
+        lblThanhTien.setText(getThanhTien() + " đ");
 
     }//GEN-LAST:event_jButton3ActionPerformed
 

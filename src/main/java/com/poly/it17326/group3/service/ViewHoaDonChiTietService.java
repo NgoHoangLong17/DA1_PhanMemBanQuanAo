@@ -15,6 +15,8 @@ public interface ViewHoaDonChiTietService {
 
     List<HoaDonChiTiet> getAll();
 
+    HoaDonChiTiet getHdctByIdCtspAndIdHd(int idCtsp, int idHd);
+
     Boolean save(HoaDonChiTiet hdct);
 
     Boolean update(HoaDonChiTiet hdct);
@@ -27,6 +29,5 @@ public interface ViewHoaDonChiTietService {
 
     HoaDonChiTiet getHdctByIdCtsp(int idctsp);
 
-    HoaDonChiTiet getOne(Integer ID);
 
 }

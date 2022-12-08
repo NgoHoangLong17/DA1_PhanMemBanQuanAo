@@ -135,19 +135,76 @@ public class KhuyenMaiRepository {
         return false;
     }
     
-    public void auto() {
-        try (Session session = HibernateConfig.getFACTORY().openSession();) {
-            Transaction transaction = session.beginTransaction();
-            String hql = "update KHUYENMAI set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
-                    + "update KHUYENMAI set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
-                    + "update KHUYENMAI set TRANGTHAI=2 where GETDATE() <NGAYBATDAU ";
-            Query query = session.createQuery(hql);
-            query.executeUpdate();
+//    public void auto() {
+//        try (Session session = HibernateConfig.getFACTORY().openSession();) {
+//            Transaction transaction = session.beginTransaction();
+//            String hql = " update KHUYENMAI set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
+//                    + "update KHUYENMAI set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
+//                    + "update KHUYENMAI set TRANGTHAI=2 where GETDATE() <NGAYBATDAU  ";
+//            Query query = session.createQuery(hql);
+//            query.executeUpdate();
+//            transaction.commit();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
+//    
+    public void auto1() {
+        Transaction transaction = null;
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            String sql = "update KhuyenMai set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
+                    ;
+            transaction = session.beginTransaction();
+            Query q = session.createQuery(sql);
+            q.executeUpdate();
             transaction.commit();
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-
+    }
+    
+    public void auto2() {
+        Transaction transaction = null;
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            String sql = "update KhuyenMai set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
+                    ;
+            transaction = session.beginTransaction();
+            Query q = session.createQuery(sql);
+            q.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+    public void auto3() {
+        Transaction transaction = null;
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            String sql = "update KhuyenMai set TRANGTHAI=2 where GETDATE() <NGAYBATDAU\n"
+                    ;
+            transaction = session.beginTransaction();
+            Query q = session.createQuery(sql);
+            q.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    
+     public void autoHuy(String maHoaDon) {
+        Transaction transaction = null;
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            String sql = "update KhuyenMai set TRANGTHAI=5 where maHoaDon = :ma"
+                    ;
+            transaction = session.beginTransaction();
+            Query q = session.createQuery(sql);
+            q.setParameter("ma", maHoaDon);
+            q.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
     }
 
      public List<KhuyenMai> tim(String Ten) {
@@ -163,7 +220,6 @@ public class KhuyenMaiRepository {
 
     }
 
-   
 
 }
 //>>>>>>> origin/Dev

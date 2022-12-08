@@ -52,8 +52,12 @@ public class KhuyenMai {
     public  String htTrangThai(){
         if(trangThai == 1){
             return "Đã hết hạn";
-        }else{
+        }else if(trangThai == 0){
             return "Đang hoạt động";
+        }else if(trangThai == 2){
+            return "Sắp bắt đầu";
+        }else{
+            return "Đã hủy";
         }
     }
 }

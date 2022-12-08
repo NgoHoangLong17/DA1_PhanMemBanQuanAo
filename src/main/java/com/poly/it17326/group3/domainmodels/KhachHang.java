@@ -44,6 +44,9 @@ public class KhachHang {
     @Column(name = "sdt")
     private String sdt;
     
+     
+    @Column(name = "email")
+    private String email;
     
      
     @Column(name = "capbac")

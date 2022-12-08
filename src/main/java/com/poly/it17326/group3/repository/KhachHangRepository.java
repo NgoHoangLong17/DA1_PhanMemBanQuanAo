@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
 public class KhachHangRepository {
 
     private Session session = HibernateConfig.getFACTORY().openSession();
-    private String fromTable = "From KhachHang ";
+    private String fromTable = "From KhachHang";
 
     public List<KhachHang> getAll() {
         Query query = session.createQuery(fromTable);
@@ -110,7 +110,6 @@ public class KhachHangRepository {
             javax.persistence.Query query = session.createQuery(sql);
             query.setParameter("Ten", Ten);           
             List<KhachHang> listkh = (List<KhachHang>) query.getResultList();
-
             session.close();
             return listkh;
         }

@@ -27,29 +27,28 @@ public class KhachHangServiceImpl implements ViewKhachHangService {
     @Override
     public Boolean update(KhachHang KhachHang) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    return KhachHangRepository.update(KhachHang);
-        
+        return KhachHangRepository.update(KhachHang);
+
     }
 
     @Override
     public Boolean add(KhachHang KhachHang) {
-return  KhachHangRepository.add(KhachHang);
-        }
+        return KhachHangRepository.add(KhachHang);
+    }
 
     @Override
     public Boolean Delete(KhachHang KhachHang) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    return KhachHangRepository.Delete(KhachHang);
+        return KhachHangRepository.Delete(KhachHang);
     }
 
     @Override
     public List<KhachHang> tim(String Ten) {
-          return KhachHangRepository.tim(Ten);
+        return KhachHangRepository.tim(Ten);
     }
 
     @Override
     public KhachHang getOne(int id) {
         return KhachHangRepository.getOne(id);
     }
-
 }

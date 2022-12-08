@@ -54,7 +54,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
  *
  * @author doand
@@ -70,11 +69,12 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private WebcamPanel panel = null;
     public Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+    ArrayList<ChiTietSp> list = new ArrayList<>();
 
     /**
      * Creates new form ChiTietSpJpanel
      */
-    public  void initWebcam() {
+    public void initWebcam() {
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam = Webcam.getWebcams().get(0);
         webcam.setViewSize(size);
@@ -123,6 +123,11 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         return t;
     }
 
+    public String zenMaNV(List<ChiTietSp> listNV) {
+        String ma = "MaCtsp";
+        return ma + String.valueOf(listNV.size() + 1);
+    }
+
     public void loadCboSp(List<SanPham> list) {
         DefaultComboBoxModel row = new DefaultComboBoxModel();
         for (SanPham sanPham : list) {
@@ -132,13 +137,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
     }
 
-//    public void loadAnh(List<Anh> list) {
-//        DefaultComboBoxModel row = new DefaultComboBoxModel();
-//        for (Anh anh : list) {
-//            row.addElement(anh.getTen());
-//        }
-//        cboAnh.setModel(row);
-//    }
     public void loadChatLieu(List<ChatLieu> list) {
         DefaultComboBoxModel row = new DefaultComboBoxModel();
         for (ChatLieu chatLieu : list) {
@@ -184,23 +182,15 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         model.setRowCount(0);
 
         model.setColumnIdentifiers(new Object[]{
-            "id", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota", "anh"
+            //            "id",
+            "machitietsp", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota", "anh"
         });
         for (ChiTietSp chiTietSanPham : list) {
-            Object[] row = new Object[]{chiTietSanPham.getId(), chiTietSanPham.getChatLieu().getTen(), chiTietSanPham.getDongSp().getTen(),
+            Object[] row = new Object[]{chiTietSanPham.getMactsp(), chiTietSanPham.getChatLieu().getTen(), chiTietSanPham.getDongSp().getTen(),
                 chiTietSanPham.getSize().getTen(), chiTietSanPham.getNsx().getTen(), chiTietSanPham.getMauSac().getTen(), chiTietSanPham.getSanPham().getTen(), chiTietSanPham.getSoLuongTon(),
                 chiTietSanPham.getGia(), chiTietSanPham.getMoTa(), chiTietSanPham.getAnh()};
             model.addRow(row);
         }
-    }
-
-    public void loadTable1() {
-        model = (DefaultTableModel) tblChiTietSp.getModel();
-        model.setRowCount(0);
-
-        model.setColumnIdentifiers(new Object[]{
-            "id", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota", "anh"
-        });
     }
 
     public ChiTietSpJpanel() {
@@ -252,8 +242,8 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         txtFilePath = new javax.swing.JTextField();
         jplCam = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSUa = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -261,6 +251,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         btnNhapExcel = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChiTietSp = new javax.swing.JTable();
@@ -275,6 +266,13 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
         jLabel2.setText("Ma San Pham");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 86, 94, 25));
+
+        txtMaSp.setEditable(false);
+        txtMaSp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSpActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtMaSp, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 87, 282, -1));
 
         jLabel4.setText("San Pham");
@@ -308,24 +306,72 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 216, 94, 25));
 
         lblAnh.setText("jLabel13");
-        jPanel1.add(lblAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 86, 150, 203));
+        jPanel1.add(lblAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 160, 203));
 
         cboNsx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNsx.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboNsxMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboNsxMouseEntered(evt);
+            }
+        });
+        cboNsx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNsxActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboNsx, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 217, 282, -1));
 
         cboSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboSanPhamMouseEntered(evt);
+            }
+        });
+        cboSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSanPhamActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 87, 282, -1));
 
         cboDongSp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDongSp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboDongSpMouseEntered(evt);
+            }
+        });
+        cboDongSp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDongSpActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboDongSp, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 118, 282, -1));
 
         cboMauSac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboMauSacMouseEntered(evt);
+            }
+        });
         jPanel1.add(cboMauSac, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 149, 282, -1));
 
         cboChatLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboChatLieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboChatLieuMouseEntered(evt);
+            }
+        });
         jPanel1.add(cboChatLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 186, 282, -1));
 
         cboSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboSize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cboSizeMouseEntered(evt);
+            }
+        });
         jPanel1.add(cboSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 217, 282, -1));
 
         jButton7.setText("Nguon anh");
@@ -341,17 +387,17 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         jplCam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jplCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 6, 260, 230));
 
-        jButton1.setText("Them");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Them");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Sua");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSUa.setText("Sua");
+        btnSUa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSUaActionPerformed(evt);
             }
         });
 
@@ -406,38 +452,50 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             }
         });
 
+        jButton9.setText("Thuoc Tinh");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(29, 29, 29)
-                .addComponent(jButton3)
-                .addGap(27, 27, 27)
-                .addComponent(jButton4)
-                .addGap(43, 43, 43)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNhapExcel)
-                .addGap(30, 30, 30)
-                .addComponent(jButton5)
-                .addGap(30, 30, 30)
-                .addComponent(jButton6)
-                .addGap(21, 21, 21))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSUa)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton3)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton4)
+                        .addGap(43, 43, 43)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNhapExcel)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton5)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton6)
+                        .addGap(21, 21, 21))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton9)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btnThem)
+                    .addComponent(btnSUa)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
@@ -445,7 +503,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                     .addComponent(btnNhapExcel)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         tblChiTietSp.setModel(new javax.swing.table.DefaultTableModel(
@@ -471,8 +531,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,14 +593,14 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         try {
+            List<ChiTietSp> list = chiTietSpServiceImpl.getAll();
             ChiTietSp chiTietSp = new ChiTietSp();
 
-//            int index1 = cboAnh.getSelectedIndex();
-//            Anh anh = chiTietSpServiceImpl.getAnh().get(index1);
-//            chiTietSp.setAnh(anh);
+            chiTietSp.setMactsp(zenMaNV(list));
+
             int index2 = cboChatLieu.getSelectedIndex();
             ChatLieu chatLieu = chiTietSpServiceImpl.getChatLieu().get(index2);
             chiTietSp.setChatLieu(chatLieu);
@@ -569,9 +630,16 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             chiTietSp.setMoTa(txtMoTa.getText());
 
             chiTietSp.setAnh(txtFilePath.getText());
-
+            if (txtGia.getText().isEmpty() || txtMoTa.getText().isEmpty() || txtSoLuongTon.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "moi dien du thuoc tinh");
+                return;
+            }
+            if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
+                JOptionPane.showMessageDialog(this, "that bai");
+                return;
+            }
             if (chiTietSpServiceImpl.add(chiTietSp) == true) {
-                JOptionPane.showMessageDialog(this, "thanh cong");
+                JOptionPane.showMessageDialog(this, "them  thanh cong");
                 loadTable(chiTietSpRepository.getAll());
             } else {
                 JOptionPane.showMessageDialog(this, "that cong");
@@ -581,11 +649,12 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             e.printStackTrace();
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblChiTietSpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSpMouseClicked
         // TODO add your handling code here:
         int index = tblChiTietSp.getSelectedRow();
+
         txtMaSp.setText(tblChiTietSp.getValueAt(index, 0).toString());
         cboChatLieu.setSelectedItem(tblChiTietSp.getValueAt(index, 1));
         cboDongSp.setSelectedItem(tblChiTietSp.getValueAt(index, 2));
@@ -608,7 +677,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         JFileChooser execlExportChooser = new JFileChooser(CurentDirectoryFilePath);
         FileNameExtensionFilter excelFNEF = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
         execlExportChooser.setFileFilter(excelFNEF);
-        execlExportChooser.setDialogTitle("Save excel... ");
+        execlExportChooser.setDialogTitle("Luu excel... ");
 
         int excelChooser = execlExportChooser.showSaveDialog(null);
         if (excelChooser == JFileChooser.APPROVE_OPTION) {
@@ -631,6 +700,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 excelBOU.close();
                 exceSSFWorkbookExprort.close();
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -639,9 +709,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         // TODO add your handling code here:
         try {
             boolean printJatable = tblChiTietSp.print();
-            JOptionPane.showConfirmDialog(null, "Print Succesfully");
+            JOptionPane.showConfirmDialog(null, "In thanh cong");
             if (!printJatable) {
-                JOptionPane.showConfirmDialog(null, "Unable To Print");
+                JOptionPane.showConfirmDialog(null, "In khong thanh cong");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -652,6 +722,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
         try {
             // TODO add your handling code here:
+
             File excelFile;
             FileInputStream excelFIS = null;
             BufferedInputStream excelBIS = null;
@@ -669,14 +740,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
                 for (int i = 0; i < excelSheet.getLastRowNum(); i++) {
                     XSSFRow excelrow = excelSheet.getRow(i); //row
-//                    for (int j = 0; j < excelrow.getLastCellNum(); j++) {
-//                        XSSFCell excelCell =excelrow.getCell(j);
-//                        System.out.println(excelCell.getStringCellValue());
-//                    }
-
-//                    
-//                    XSSFCell excelName = excelrow.getCell(0);
-//                    System.out.println(excelName);
                     XSSFCell excelId = excelrow.getCell(0);
                     XSSFCell excelChatLieu = excelrow.getCell(1);
                     XSSFCell excelDongSp = excelrow.getCell(2);
@@ -703,10 +766,16 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         }
     }//GEN-LAST:event_btnNhapExcelActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSUaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUaActionPerformed
         // TODO add your handling code here:
+
+//  
+
         try {
+            List<ChiTietSp> list = chiTietSpServiceImpl.getAll();
             ChiTietSp chiTietSp = new ChiTietSp();
+
+            chiTietSp.setMactsp(zenMaNV(list));
 
             int index2 = cboChatLieu.getSelectedIndex();
             ChatLieu chatLieu = chiTietSpServiceImpl.getChatLieu().get(index2);
@@ -737,7 +806,14 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             chiTietSp.setMoTa(txtMoTa.getText());
 
             chiTietSp.setAnh(txtFilePath.getText());
-
+            if (txtGia.getText().isEmpty() || txtMoTa.getText().isEmpty() || txtSoLuongTon.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "moi dien du thuoc tinh");
+                return;
+            }
+            if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
+                JOptionPane.showMessageDialog(this, "that bai");
+                return;
+            }
             if (chiTietSpServiceImpl.update(chiTietSp) == true) {
                 JOptionPane.showMessageDialog(this, "thanh cong");
                 loadTable(chiTietSpRepository.getAll());
@@ -748,7 +824,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSUaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -762,9 +838,14 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(txtTimKiem.getText());
-        ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
-        loadTable(lisy);
+        if (txtTimKiem.getText().isEmpty()) {
+            loadTable(chiTietSpServiceImpl.getAll());
+        } else {
+
+            String id = txtTimKiem.getText();
+            ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
+            loadTable(lisy);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
@@ -774,8 +855,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        int id = Integer.parseInt(txtTimKiem.getText());
+        String id = txtTimKiem.getText();
         ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
+
         loadTable(lisy);
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
@@ -784,32 +866,100 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         int index = tblChiTietSp.getSelectedRow();
 
         qrcode qr = new qrcode();
-        int id = Integer.parseInt( tblChiTietSp.getValueAt(index, 0).toString());
+        String id = tblChiTietSp.getValueAt(index, 0).toString();
         try {
             qr.output(id);
+            JOptionPane.showMessageDialog(this, " xuat bar_code thanh cong thanh cong");
         } catch (WriterException ex) {
             Logger.getLogger(ChiTietSpJpanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        ThuocTinhSapPhamJfame jfame = new ThuocTinhSapPhamJfame();
+        jfame.setVisible(true);
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void cboNsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNsxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboNsxActionPerformed
+
+    private void cboNsxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboNsxMouseClicked
+//         TODO add your handling code here:
+//        loadNsx(chiTietSpServiceImpl.getNsx());
+    }//GEN-LAST:event_cboNsxMouseClicked
+
+    private void cboNsxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboNsxMouseEntered
+        // TODO add your handling code here:
+
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadNsx(chiTietSpServiceImpl.getNsx());
+    }//GEN-LAST:event_cboNsxMouseEntered
+
+    private void txtMaSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSpActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtMaSpActionPerformed
+
+    private void cboSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSanPhamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboSanPhamActionPerformed
+
+    private void cboSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboSanPhamMouseEntered
+        // TODO add your handling code here:
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadCboSp(chiTietSpServiceImpl.getSanPham());
+    }//GEN-LAST:event_cboSanPhamMouseEntered
+
+    private void cboDongSpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDongSpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDongSpActionPerformed
+
+    private void cboDongSpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboDongSpMouseEntered
+        // TODO add your handling code here:
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadDongSp(chiTietSpServiceImpl.getDongSp());
+    }//GEN-LAST:event_cboDongSpMouseEntered
+
+    private void cboMauSacMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboMauSacMouseEntered
+        // TODO add your handling code here:
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadMauSac(chiTietSpServiceImpl.getMauSac());
+    }//GEN-LAST:event_cboMauSacMouseEntered
+
+    private void cboChatLieuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboChatLieuMouseEntered
+        // TODO add your handling code here:
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadChatLieu(chiTietSpServiceImpl.getChatLieu());
+    }//GEN-LAST:event_cboChatLieuMouseEntered
+
+    private void cboSizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboSizeMouseEntered
+        // TODO add your handling code here:
+        chiTietSpServiceImpl = new ChiTietSpServiceImpl();
+        loadSize(chiTietSpServiceImpl.getSize());
+    }//GEN-LAST:event_cboSizeMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhapExcel;
+    private javax.swing.JButton btnSUa;
+    private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboDongSp;
     private javax.swing.JComboBox<String> cboMauSac;
     private javax.swing.JComboBox<String> cboNsx;
     private javax.swing.JComboBox<String> cboSanPham;
     private javax.swing.JComboBox<String> cboSize;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -836,9 +986,5 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private javax.swing.JTextField txtSoLuongTon;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
-
-    private void showPanel(ThuocTinhSanPhamJPanel thuocTinhSanPhamJPanel) {
-        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

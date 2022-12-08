@@ -41,6 +41,19 @@ public class ChiTietSpRepository {
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
 
+    public ArrayList<ChiTietSp> getCheckTrung(int idsp, int iddongsp, int idmausac, int idchatlieu, int idsize, int idnsx) {
+        Query query = session.createQuery(fromTable + "  where IDSP = :idsp and IDDONGSP =:iddongsp and "
+                + "IDMAUSAC =:idmausac and IDCHATLIEU =:idchatlieu and IDSIZE=:idsize and IDNSX =:idnsx");
+        query.setParameter("idsp", idsp);
+        query.setParameter("iddongsp", iddongsp);
+        query.setParameter("idmausac", idmausac);
+        query.setParameter("idchatlieu", idchatlieu);
+        query.setParameter("idsize", idsize);
+        query.setParameter("idnsx", idnsx);
+
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+
     public List<SanPham> getSanPham() {
         Query query = session.createQuery(fromSanPham);
         return query.getResultList();
@@ -116,14 +129,14 @@ public class ChiTietSpRepository {
     }
 
     public ChiTietSp getOne(int id) {
-        String sql = fromTable + " where id=:id";
+        String sql = fromTable + " where MACTSP=:id";
         Query query = session.createQuery(sql, ChiTietSp.class);
         query.setParameter("id", id);
         return (ChiTietSp) query.getSingleResult();
     }
 
-    public ArrayList<ChiTietSp> getAll1(int id) {
-        String sql = fromTable + " where id=:id";
+    public ArrayList<ChiTietSp> getAll1(String id) {
+        String sql = fromTable + " where MACTSP=:id";
         Query query = session.createQuery(sql, ChiTietSp.class);
         query.setParameter("id", id);
         return (ArrayList<ChiTietSp>) query.getResultList();

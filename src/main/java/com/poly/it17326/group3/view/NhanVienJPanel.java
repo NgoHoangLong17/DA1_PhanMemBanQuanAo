@@ -27,7 +27,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author user
@@ -47,18 +46,18 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         LoadTable((ArrayList<NhanVien>) viewNhanVienService.getNhanVien());
         loadCbo();
     }
-    
-    public String zenMaNV(List<NhanVien> listNV){
+
+    public String zenMaNV(List<NhanVien> listNV) {
         String ma = "NVI";
         return ma + String.valueOf(listNV.size() + 1);
     }
 
     private void LoadTable(ArrayList<NhanVien> listNhanVien) {
         defaultTableModel = (DefaultTableModel) tbNhanVien.getModel();
-        defaultTableModel.setColumnIdentifiers(new String[]{"ID","Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
+        defaultTableModel.setColumnIdentifiers(new String[]{"ID", "Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
         defaultTableModel.setRowCount(0);
         for (NhanVien nhanVien : listNhanVien) {
-            defaultTableModel.addRow(new Object[]{nhanVien.getId(), nhanVien.getMaNV(),nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
+            defaultTableModel.addRow(new Object[]{nhanVien.getId(), nhanVien.getMaNV(), nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
                 nhanVien.htGioiTinh(), nhanVien.getEmail(), nhanVien.getNgaySinh(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.htDeleted()});
         }
     }
@@ -71,8 +70,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             defaultComboBoxModel.addElement(chucVu.getTenChucVu());
         }
     }
-    
-    private void sendMail(){       
+
+    private void sendMail() {
 //        final String username = "tranviethung271003@gmail.com";
 //        final String password = "ibxcgycsagvxcabs";
         final String username = "tranviethung271003@gmail.com";
@@ -85,31 +84,30 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
         Session session = Session.getInstance(prop,
-            new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+                new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
-            try {
+        try {
 
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("tranviethung271003@gmail.com"));
-                message.setRecipients(
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("tranviethung271003@gmail.com"));
+            message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(txtEmail.getText())
-                );
-                message.setSubject("Mật khẩu đăng nhập");
-                message.setText("Mật khẩu của bạn là: 1");
-                Transport.send(message);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+            );
+            message.setSubject("Mat khau dang nhap");
+            message.setText("Mat khau cua ban la: 1");
+            Transport.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         JOptionPane.showMessageDialog(this, "Gửi mail thành công");
-        
+
     }
 
-    
     public void loadTextFile(int row) {
         txtId.setText(tbNhanVien.getValueAt(row, 0).toString());
         txtMaNV.setText(tbNhanVien.getValueAt(row, 1).toString());
@@ -132,8 +130,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             chekNghi.setSelected(false);
         }
     }
-    
-    private StringBuilder validator(){
+
+    private StringBuilder validator() {
         sb = new StringBuilder();
 //        if(txtMaNV.getText().isEmpty()){
 //            sb.append("Chưa nhập mã nhân viên").append("\n");
@@ -145,34 +143,38 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 //            }
         if (txtTenNhanVien.getText().isEmpty()) {
             sb.append("Chưa nhập họ tên").append("\n");
-        }if (txtEmail.getText().isEmpty()){
+        }
+        if (txtEmail.getText().isEmpty()) {
             sb.append("Chưa nhập Email").append("\n");
-        }else{
-            for(NhanVien nhanVien : viewNhanVienService.getNhanVien()){
-                if(nhanVien.getEmail().equals(txtEmail.getText())){
+        } else {
+            for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
+                if (nhanVien.getEmail().equals(txtEmail.getText())) {
                     sb.append("Email đã được sử dụng").append("\n");
-                }else{
+                } else {
                     String checkEmail = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
                     if (!txtEmail.getText().matches(checkEmail)) {
-                    sb.append("Email sai định dạng").append("\n");
+                        sb.append("Email sai định dạng").append("\n");
                     }
                 }
             }
-        }if(txtNgaySinh.getText().isEmpty()){
+        }
+        if (txtNgaySinh.getText().isEmpty()) {
             sb.append("Chưa nhập ngày sinh").append("\n");
-        }if(txtSDT.getText().isEmpty()){
+        }
+        if (txtSDT.getText().isEmpty()) {
             sb.append("Chưa nhập số điện thoại").append("\n");
-        }else{
+        } else {
             String checkSDT = "0\\d{9,10}";
             if (!txtSDT.getText().matches(checkSDT)) {
                 sb.append("SĐT sai định dạng").append("\n").append("\n");
             }
-        }if(txtDiaChi.getText().isEmpty()){
+        }
+        if (txtDiaChi.getText().isEmpty()) {
             sb.append("Chưa nhập địa chỉ").append("\n");
         }
         return sb;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -641,7 +643,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(validator().length()>0){
+        if (validator().length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
         }
@@ -699,31 +701,31 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chưa chọn dòng");
         } else {
-        NhanVien nhanVien = viewNhanVienService.getNhanVien().get(index);
-        nhanVien.setMaNV(txtMaNV.getText());
-        nhanVien.setTenNhanVien(txtTenNhanVien.getText());
-        ChucVu chucVu = viewChucVuService.getChucVu().get(cboChucVu.getSelectedIndex());
-        nhanVien.setChucVu(chucVu);
-        Boolean gioiTinh = false;
-        if (rbnNam.isSelected()) {
-            gioiTinh = true;
-        }
-        nhanVien.setGioiTinh(gioiTinh);
-        nhanVien.setEmail(txtEmail.getText());
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(date);
-        nhanVien.setNgaySinh(date);
-        nhanVien.setSDT(txtSDT.getText());
-        nhanVien.setDiaChi(txtDiaChi.getText());
+            NhanVien nhanVien = viewNhanVienService.getNhanVien().get(index);
+            nhanVien.setMaNV(txtMaNV.getText());
+            nhanVien.setTenNhanVien(txtTenNhanVien.getText());
+            ChucVu chucVu = viewChucVuService.getChucVu().get(cboChucVu.getSelectedIndex());
+            nhanVien.setChucVu(chucVu);
+            Boolean gioiTinh = false;
+            if (rbnNam.isSelected()) {
+                gioiTinh = true;
+            }
+            nhanVien.setGioiTinh(gioiTinh);
+            nhanVien.setEmail(txtEmail.getText());
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = formatter.format(date);
+            nhanVien.setNgaySinh(date);
+            nhanVien.setSDT(txtSDT.getText());
+            nhanVien.setDiaChi(txtDiaChi.getText());
 //      nhanVien.setMatKhau(txtMatKhau.getText());
-        nhanVien.setTrangThai(chekNghi.isSelected());
-        if(viewNhanVienService.sua(nhanVien)){
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
-            LoadTable((ArrayList<NhanVien>) viewNhanVienService.getNhanVien());
-        }else{
-            JOptionPane.showMessageDialog(this, "Sửa thất bại");
-        }
+            nhanVien.setTrangThai(chekNghi.isSelected());
+            if (viewNhanVienService.sua(nhanVien)) {
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                LoadTable((ArrayList<NhanVien>) viewNhanVienService.getNhanVien());
+            } else {
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -736,7 +738,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private void btnCuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuoiActionPerformed
         // TODO add your handling code here:
-        int row = viewNhanVienService.getNhanVien().size() -1;
+        int row = viewNhanVienService.getNhanVien().size() - 1;
         tbNhanVien.setRowSelectionInterval(row, row);
         loadTextFile(row);
     }//GEN-LAST:event_btnCuoiActionPerformed
@@ -767,7 +769,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

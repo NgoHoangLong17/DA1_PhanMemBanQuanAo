@@ -54,5 +54,10 @@ public class ViewNhanVienServiceImpl implements ViewNhanVienService{
     public Boolean xoa(NhanVien nhanVien) {
         return nhanVienRepository.delete(nhanVien);
     }
+
+    @Override
+    public NhanVien getOne(Integer id) {
+        return nhanVienRepository.getOne(id);
+    }
     
 }

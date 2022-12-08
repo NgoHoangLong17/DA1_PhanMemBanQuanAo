@@ -62,6 +62,11 @@ public class NhanVienRepository {
         return null;
     }
     
-    
+    public NhanVien getOne(Integer id){
+        String sql  = fromTable = "where id =:id";
+        Query query = session.createQuery(sql, NhanVien.class);
+        query.setParameter("id", id);
+        return (NhanVien) query.getSingleResult();
+    }
     
 }

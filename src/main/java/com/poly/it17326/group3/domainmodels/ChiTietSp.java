@@ -39,7 +39,7 @@ public class ChiTietSp {
     @ManyToOne
     @JoinColumn(name = "idSp", referencedColumnName = "id") //categpry
     private SanPham sanPham;
-    
+
     @ManyToOne
     @JoinColumn(name = "idDongSp", referencedColumnName = "id")
     private DongSp dongSp;
@@ -55,22 +55,22 @@ public class ChiTietSp {
     @ManyToOne
     @JoinColumn(name = "idSize", referencedColumnName = "id")
     private Size size;
-    
+
     @ManyToOne
     @JoinColumn(name = "idNsx", referencedColumnName = "id")
     private Nsx nsx;
 
- 
-
     @Column(name = "soLuongTon")
-    int soLuongTon;
+    private int soLuongTon;
 
     @Column(name = "gia")
-    int gia;
+    private int gia;
 
     @Column(name = "moTa")
-    String moTa;
-    
+    private String moTa;
+
     @Column(name = "anh")
-    String anh;
+    private String anh;
+    @Column(name = "mactsp")
+    private String mactsp;
 }

@@ -42,12 +42,11 @@ public class HibernateConfig {
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=QUANLYBANQUANAO");
         properties.put(Environment.USER, "sa");
-        properties.put(Environment.PASS, "Passwd2@");
+        properties.put(Environment.PASS, "123");
         properties.put(Environment.SHOW_SQL, "true");
         conf.setProperties(properties);
         conf.addAnnotatedClass(SanPham.class);
-        conf.addAnnotatedClass(ChiTietSp.class);
-     
+        conf.addAnnotatedClass(ChiTietSp.class);    
         conf.addAnnotatedClass(DongSp.class);
         conf.addAnnotatedClass(KhuyenMai.class);
         conf.addAnnotatedClass(ChatLieu.class);

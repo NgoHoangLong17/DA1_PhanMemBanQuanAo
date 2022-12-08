@@ -45,8 +45,8 @@ public class KhachHang {
     private String sdt;
     
      
-    @Column(name = "email")
-    private String email;
+    @Column(name = "Makhachhang")
+    private String ma;
     
      
     @Column(name = "capbac")

@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group3.service;
 
+import com.poly.it17326.group3.domainmodels.HoaDon;
 import com.poly.it17326.group3.service.impl.*;
 import com.poly.it17326.group3.service.*;
 import com.poly.it17326.group3.domainmodels.KhachHang;
@@ -16,17 +17,18 @@ import java.util.List;
 public interface ViewKhachHangService {
 
     public List<KhachHang> getAll();
-
     public KhachHang getOne(int id);
 
     public Boolean update(KhachHang KhachHang);
 
     public Boolean add(KhachHang KhachHang);
-
+    
     public Boolean Delete(KhachHang KhachHang);
-
+    
     public List<KhachHang> tim(String Ten);
     
+    //public Boolean Rank(HoaDon hoaDon);
 
+    
      
 }

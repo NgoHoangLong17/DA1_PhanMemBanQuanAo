@@ -53,12 +53,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     private void LoadTable(ArrayList<NhanVien> listNhanVien) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         defaultTableModel = (DefaultTableModel) tbNhanVien.getModel();
         defaultTableModel.setColumnIdentifiers(new String[]{"ID", "Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
         defaultTableModel.setRowCount(0);
         for (NhanVien nhanVien : listNhanVien) {
             defaultTableModel.addRow(new Object[]{nhanVien.getId(), nhanVien.getMaNV(), nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
-                nhanVien.htGioiTinh(), nhanVien.getEmail(), nhanVien.getNgaySinh(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.htDeleted()});
+                nhanVien.htGioiTinh(), nhanVien.getEmail(),formatter.format(nhanVien.getNgaySinh()), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.htDeleted()});
         }
     }
 
@@ -703,6 +704,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         } else {
             NhanVien nhanVien = viewNhanVienService.getNhanVien().get(index);
             nhanVien.setMaNV(txtMaNV.getText());
+            nhanVien.setCccd(txtCccd.getText());
             nhanVien.setTenNhanVien(txtTenNhanVien.getText());
             ChucVu chucVu = viewChucVuService.getChucVu().get(cboChucVu.getSelectedIndex());
             nhanVien.setChucVu(chucVu);

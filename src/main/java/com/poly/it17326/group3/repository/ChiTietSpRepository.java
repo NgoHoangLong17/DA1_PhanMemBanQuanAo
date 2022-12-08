@@ -134,6 +134,13 @@ public class ChiTietSpRepository {
         query.setParameter("id", id);
         return (ChiTietSp) query.getSingleResult();
     }
+    
+    public ChiTietSp getOneByMaCtsp(String ma) {
+        String sql = fromTable + " where MACTSP=:ma";
+        Query query = session.createQuery(sql, ChiTietSp.class);
+        query.setParameter("ma", ma);
+        return (ChiTietSp) query.getSingleResult();
+    }
 
     public ArrayList<ChiTietSp> getAll1(String id) {
         String sql = fromTable + " where MACTSP=:id";

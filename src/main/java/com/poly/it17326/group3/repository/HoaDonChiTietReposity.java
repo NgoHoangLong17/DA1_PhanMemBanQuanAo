@@ -67,7 +67,7 @@ public class HoaDonChiTietReposity implements Serializable {
         }
         return null;
     }
-    
+
 //    public Boolean deleteByIdHd(int idhd) {
 //        Transaction transaction = null;
 //        try ( Session session = HibernateConfig.getFACTORY().openSession()) {
@@ -82,7 +82,6 @@ public class HoaDonChiTietReposity implements Serializable {
 //        }
 //        return null;
 //    }
-
     public HoaDonChiTiet getOne(int id) {
         String sql = fromTable + "where id=:id";
         Query query = session.createQuery(sql, HoaDonChiTiet.class);
@@ -103,10 +102,18 @@ public class HoaDonChiTietReposity implements Serializable {
         query.setParameter("idctsp", idCtsp);
         return (HoaDonChiTiet) query.getSingleResult();
     }
-    
+
+    public HoaDonChiTiet getHdctByIdCtspAndIdHd(int idCtsp, int idHd) {
+        String sql = fromTable + " where idCtSp =:idctsp and idHoaDon =:idhd";
+        Query query = session.createQuery(sql, HoaDonChiTiet.class);
+        query.setParameter("idctsp", idCtsp);
+        query.setParameter("idhd", idHd);
+
+        return (HoaDonChiTiet) query.getSingleResult();
+    }
 
     public static void main(String[] args) {
-//        System.out.println(new HoaDonChiTietReposity().deleteByIdHd(25));
+        System.out.println(new HoaDonChiTietReposity().getHdctByIdCtsp(1));
     }
 
 }

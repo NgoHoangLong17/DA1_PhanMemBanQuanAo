@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group3.service;
 
-
 import com.poly.it17326.group3.domainmodels.ChatLieu;
 import com.poly.it17326.group3.domainmodels.ChiTietSp;
 import com.poly.it17326.group3.domainmodels.DongSp;
@@ -23,7 +22,7 @@ public interface ViewChiTietSPService {
 
     public ArrayList<ChiTietSp> getAll();
 
-
+    ChiTietSp getOneByMaCtsp(String ma);
 
     public List<SanPham> getSanPham();
 

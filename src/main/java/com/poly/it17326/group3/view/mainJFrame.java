@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group3.view;
 
+import com.poly.it17326.group3.domainmodels.NhanVien;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JButton;
@@ -539,6 +540,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnQuanLyNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNVActionPerformed
         // TODO add your handling code here:
+        showPanel(new NhanVienJPanel());
     }//GEN-LAST:event_btnQuanLyNVActionPerformed
 
     private void btnQuanLySPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLySPMouseEntered

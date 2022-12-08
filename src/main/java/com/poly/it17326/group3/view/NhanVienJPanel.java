@@ -599,6 +599,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         txtId.setText(null);
         txtMaNV.setText(null);
+        txtCccd.setText(null);
         txtTenNhanVien.setText(null);
         cboChucVu.setSelectedItem(0);
         txtDiaChi.setText(null);

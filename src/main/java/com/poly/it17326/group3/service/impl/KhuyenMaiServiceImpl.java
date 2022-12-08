@@ -36,5 +36,10 @@ public class KhuyenMaiServiceImpl implements ViewKhuyenMaiService{
     public List<KhuyenMai> getAll() {
         return khuyenMaiRepository.getAll();
     }
+
+    @Override
+    public List<KhuyenMai> tim(String Ten) {
+        return khuyenMaiRepository.tim(Ten);
+    }
     
 }

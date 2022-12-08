@@ -475,7 +475,7 @@ public class mainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhuyenMaiMouseExited
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
-        // TODO add your handling code here:
+        showPanel(new KhuyenMaiJPanel());
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnGiaoCaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGiaoCaMouseEntered

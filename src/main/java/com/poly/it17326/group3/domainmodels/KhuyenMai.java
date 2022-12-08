@@ -33,6 +33,9 @@ public class KhuyenMai {
 
     @Column(name = "TEN")
     private String ten;
+    
+    @Column(name = "MAKHUYENMAI")
+    private String ma;
 
     @Column(name = "MUCGIAMGIA")
     private int mucGiamGia;
@@ -42,4 +45,15 @@ public class KhuyenMai {
 
     @Column(name = "NGAYKETTHUC")
     private Date ngayKetThuc;
+    
+    @Column(name = "TRANGTHAI")
+    private int trangThai;
+    
+    public  String htTrangThai(){
+        if(trangThai == 1){
+            return "Đã hết hạn";
+        }else{
+            return "Đang hoạt động";
+        }
+    }
 }

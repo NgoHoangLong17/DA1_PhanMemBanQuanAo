@@ -134,12 +134,36 @@ public class KhuyenMaiRepository {
         }
         return false;
     }
+    
+    public void auto() {
+        try (Session session = HibernateConfig.getFACTORY().openSession();) {
+            Transaction transaction = session.beginTransaction();
+            String hql = "update KHUYENMAI set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
+                    + "update KHUYENMAI set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
+                    + "update KHUYENMAI set TRANGTHAI=2 where GETDATE() <NGAYBATDAU ";
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
+            transaction.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
-
-    public static void main(String[] args) {
-        new KhuyenMaiRepository().save(new KhuyenMai(4, "Giam gia ngay 9-3", 30, null, null));
-        System.out.println(new KhuyenMaiRepository().getAll().toString());
     }
+
+     public List<KhuyenMai> tim(String Ten) {
+
+        try (Session session = HibernateConfig.getFACTORY().openSession();) {
+            String sql = "from KhuyenMai where Ten = :Ten";
+            javax.persistence.Query query = session.createQuery(sql);
+            query.setParameter("Ten", Ten);
+            List<KhuyenMai> listkm = (List<KhuyenMai>) query.getResultList();
+            session.close();
+            return listkm;
+        }
+
+    }
+
+   
 
 }
 //>>>>>>> origin/Dev

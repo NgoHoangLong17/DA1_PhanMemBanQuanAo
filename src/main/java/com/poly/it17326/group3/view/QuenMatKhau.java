@@ -31,6 +31,7 @@ Random random = new Random();
      */
     public QuenMatKhau() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -161,6 +162,10 @@ Random random = new Random();
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
             return;
         }
+        if(!txtMatkhauMoi.getText().equals(String.valueOf(txtXacNhanMK.getText()))){
+            JOptionPane.showMessageDialog(this, "Mật khẩu không trùng khớp");
+            return;
+        }
         if(!txtMa.getText().equals(String.valueOf(i))){
             JOptionPane.showMessageDialog(this,"mã xác nhận không đúng");
             return;
@@ -169,8 +174,9 @@ Random random = new Random();
         if(password.equals(confirm)){
             vqmks.changePassword(ma,matKhau);
             JOptionPane.showMessageDialog(this, "Mật khẩu đã được cập nhật");
+            this.dispose();
         }
-
+       
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void btnXacThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacThucActionPerformed
@@ -205,7 +211,8 @@ Random random = new Random();
                 message.setText("Ma xac thuc cua ban la:"+i);
                 Transport.send(message);
             } catch (MessagingException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Email không phù hợp");
+                return;
             }
 
     }//GEN-LAST:event_btnXacThucActionPerformed

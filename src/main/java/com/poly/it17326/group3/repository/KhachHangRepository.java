@@ -5,6 +5,7 @@
 package com.poly.it17326.group3.repository;
 
 import com.poly.it17326.group3.config.HibernateConfig;
+import com.poly.it17326.group3.domainmodels.HoaDon;
 import com.poly.it17326.group3.response.KhachHangReponse;
 import com.poly.it17326.group3.domainmodels.KhachHang;
 import java.util.List;
@@ -115,4 +116,28 @@ public class KhachHangRepository {
             return listkh;
         }
 }
+    
+    public Boolean updateRank(String tong,KhachHang KhachHang) {
+        Transaction transaction = null;
+        try ( Session session = HibernateConfig.getFACTORY().openSession();) {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT dbo.HOADON.IDKHACHHANG, Sum(dbo.HOADON.TIENKHACHTRA) as Tong\n" +
+"FROM   dbo.HOADON INNER JOIN\n" +
+"             dbo.KHACHHANG ON dbo.HOADON.IDKHACHHANG = dbo.KHACHHANG.ID\n" +
+"			 where dbo.HOADON.IDKHACHHANG = :tong\n" +
+"group by dbo.HOADON.IDKHACHHANG");
+            query.setParameter("tong",tong);
+            query.setParameter("capBac",KhachHang.getCapBac());
+            query.executeUpdate();
+            transaction.commit();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+}
+    
+    
 }

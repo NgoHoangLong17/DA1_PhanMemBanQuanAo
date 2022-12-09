@@ -65,7 +65,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
     private ViewHoaDonChiTietService hoaDonChiTietService;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private ViewKhachHangService khachHangService;
-    
 
     /**
      * Creates new form BanHangJPanel
@@ -81,6 +80,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         lblMaHD.setText("");
         loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(-1));
         loadKHHD();
+        loadChonHD();
     }
 
     private String fomartNgay(Date d) {
@@ -174,13 +174,13 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         tableModel = (DefaultTableModel) tblHdct.getModel();
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(new String[]{
-            "STT", "Mã SP", "Tên SP",  "Màu sắc", "Chất liệu", "Size", "Số lượng", "Đơn giá", "Thành tiền"
+            "STT", "Mã SP", "Tên SP", "Màu sắc", "Chất liệu", "Size", "Số lượng", "Đơn giá", "Thành tiền"
         });
         int i = 1;
         for (HoaDonChiTiet hdct : list) {
             tableModel.addRow(new Object[]{
                 i, hdct.getChiTietSp().getMactsp(), hdct.getChiTietSp().getSanPham().getTen(),
-                 hdct.getChiTietSp().getMauSac().getTen(),
+                hdct.getChiTietSp().getMauSac().getTen(),
                 hdct.getChiTietSp().getChatLieu().getTen(),
                 hdct.getChiTietSp().getSize().getTen(), hdct.getSoLuong(), hdct.getDONGIA(), hdct.getSoLuong() * hdct.getDONGIA()});
             i++;
@@ -361,16 +361,37 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
             public void run() {
                 while (true) {
                     if (ChonKhachHang.getKhachHang().getId() == 1) {
-                        lblTenKH.setText(ChonKhachHang.getKhachHang().getTen() );
-                    lblMaKH.setText("Khách lẻ");
+                        lblTenKH.setText(ChonKhachHang.getKhachHang().getTen());
+                        lblMaKH.setText("Khách lẻ");
 
-                    }else{
+                    } else {
                         lblTenKH.setText(ChonKhachHang.getKhachHang().getTen() + "   Rank:" + ChonKhachHang.getKhachHang().capbac());
-                    lblMaKH.setText(ChonKhachHang.getKhachHang().getMa());
+                        lblMaKH.setText(ChonKhachHang.getKhachHang().getMa());
                     }
-                    
+
                     try {
                         Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BanHangJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+        }.start();
+    }
+
+    private void loadChonHD() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    if (ChonKhuyenMai.getKhuyenMai() != null) {
+                        lblMaGiamGia.setText(ChonKhuyenMai.getKhuyenMai().getMa());
+                        HoaDon hd = hoaDonService.getOneByMaHD(getMaHd());
+                        txtGiamGia.setText((hd.getTongTien() * ChonKhuyenMai.getKhuyenMai().getMucGiamGia() / 100) + "");
+                    }
+                    try {
+                        Thread.sleep(200);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(BanHangJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -749,6 +770,11 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         });
 
         jButton2.setText("Chọn");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         lblMaGiamGia.setText("Mã");
 
@@ -961,7 +987,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         lblThanhTien.setText(getThanhTien() + " đ");
         HoaDon hd = hoaDonService.getOneByMaHD(getMaHd());
         ChonKhachHang.setKhachHang(hd.getKhachHang());
-                
+
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void tblCtspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCtspMouseClicked
@@ -992,8 +1018,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
     private void tblHdctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHdctMouseClicked
         // TODO add your handling code here:
-        
-        
+
         int row = tblHdct.getSelectedRow();
         String maCtsp = tblHdct.getValueAt(row, 1).toString();
         HoaDonChiTiet hdct = hoaDonChiTietService.getHdctByIdCtspAndIdHd(chiTietSPService.getOneByMaCtsp(maCtsp).getId(), getIdHd());
@@ -1101,6 +1126,11 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         lblTenKH.setText(ChonKhachHang.getKhachHang().getTen());
         lblMaKH.setText(ChonKhachHang.getKhachHang().getMa());
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new KhuyenMaiJframe().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

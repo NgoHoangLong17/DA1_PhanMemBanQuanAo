@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group3.view;
 
+import com.poly.it17326.group3.repository.KhachHangRepository;
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private JPanel jpanel;
     BanHangJPanel banHangJPanel;
     ChiTietSpJpanel chiTietSpJpanel;
+    private KhachHangJpanel khachHangJpanel;
 
     /**
      * Creates new form mainJFrame
@@ -26,6 +28,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        khachHangJpanel = new KhachHangJpanel();
         dongHo();
         lblTenNV.setText("Tên NV");
         banHangJPanel = new BanHangJPanel();
@@ -423,8 +426,11 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnQuanLyKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyKHActionPerformed
         // TODO add your handling code here:
-        closeWebcam();
+
+        showPanel(khachHangJpanel);
         hover(btnQuanLyKH);
+        closeWebcam();
+        new KhachHangJpanel().loadDatakhachHang(new KhachHangRepository().getAll());
     }//GEN-LAST:event_btnQuanLyKHActionPerformed
 
     private void btnQuanLyKHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyKHMouseEntered
@@ -477,7 +483,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         // TODO add your handling code here:
-                closeWebcam();
+        closeWebcam();
 
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
@@ -493,7 +499,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaoCaActionPerformed
         // TODO add your handling code here:
-                closeWebcam();
+        closeWebcam();
 
     }//GEN-LAST:event_btnGiaoCaActionPerformed
 
@@ -507,26 +513,18 @@ public class mainJFrame extends javax.swing.JFrame {
         defaultHover();
     }//GEN-LAST:event_btnTrangChuMouseExited
     private void closeWebcam() {
-        if (chiTietSpJpanel.webcam != null || chiTietSpJpanel.webcam.isOpen()) {
+        if (chiTietSpJpanel.webcam != null) {
             chiTietSpJpanel.webcam.close();
         }
-        if (banHangJPanel.webcam != null || banHangJPanel.webcam.isOpen()) {
+        if (banHangJPanel.webcam != null) {
             banHangJPanel.webcam.close();
-        }
-
-        if (chiTietSpJpanel.webcam == null) {
-            chiTietSpJpanel.initWebcam();
         }
 
     }
     private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
-        if (chiTietSpJpanel.webcam != null || chiTietSpJpanel.webcam.isOpen()) {
-            chiTietSpJpanel.webcam.close();
-        }
-
+        closeWebcam();
         showPanel(banHangJPanel);
         banHangJPanel.initWebcam();
-
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
     private void btnThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseEntered
@@ -541,7 +539,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
-                closeWebcam();
+        closeWebcam();
 
     }//GEN-LAST:event_btnThongKeActionPerformed
 
@@ -557,7 +555,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnQuanLyNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNVActionPerformed
         // TODO add your handling code here:
-                closeWebcam();
+        closeWebcam();
 
     }//GEN-LAST:event_btnQuanLyNVActionPerformed
 
@@ -572,15 +570,10 @@ public class mainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuanLySPMouseExited
 
     private void btnQuanLySPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLySPActionPerformed
-        if (banHangJPanel.webcam != null || banHangJPanel.webcam.isOpen()) {
-            banHangJPanel.webcam.close();
-        }
 
         showPanel(chiTietSpJpanel);
-        if (chiTietSpJpanel.webcam == null) {
-            chiTietSpJpanel.initWebcam();
-        }
-        chiTietSpJpanel.initWebcam();
+        closeWebcam();
+
 
     }//GEN-LAST:event_btnQuanLySPActionPerformed
 

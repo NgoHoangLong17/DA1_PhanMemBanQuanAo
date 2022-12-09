@@ -27,19 +27,23 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
     //private KhachHangServiceImpl KhachHangServiceImpl = new KhachHangServiceImpl();
     //private KhachHangRepository KhachHangRepository = new KhachHangRepository();
-    private ViewKhachHangService viewKhachHangService = new KhachHangServiceImpl();
-    private ViewHoaDonService hoaDonService = new HoaDonServiceImpl();
+    private ViewKhachHangService viewKhachHangService;
+    private ViewHoaDonService hoaDonService;
 
     /**
      * Creates new form KhachHangJpanel
      */
     public KhachHangJpanel() {
         initComponents();
+        viewKhachHangService = new KhachHangServiceImpl();
+        hoaDonService = new HoaDonServiceImpl();
         loadDatakhachHang(viewKhachHangService.getAll());
+//        updateRankAll();
         auto();
     }
 
     public void loadDatakhachHang(List<KhachHang> list) {
+        viewKhachHangService = new KhachHangServiceImpl();
         DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
         model.setRowCount(0);
         model.setColumnIdentifiers(new Object[]{"Mã KH", "Tên", "Sdt", "Cấp bậc", "Địa chỉ"});
@@ -52,13 +56,13 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 
     }
 
-    
-
     private void auto() {
         new Thread() {
             @Override
             public void run() {
                 while (true) {
+                    viewKhachHangService = new KhachHangServiceImpl();
+
                     updateRankAll();
                     loadDatakhachHang(viewKhachHangService.getAll());
                     if (getIdKHByMa() != -1) {
@@ -66,7 +70,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
                         System.out.println(viewKhachHangService.getOne(getIdKHByMa()).capbac());
                     }
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(20000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(KhachHangJpanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -77,6 +81,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     private int getIdKHByMa() {
+        viewKhachHangService = new KhachHangServiceImpl();
+
         for (KhachHang kh : viewKhachHangService.getAll()) {
             if (kh.getMa().equals(txtMa.getText())) {
                 return kh.getId();
@@ -86,6 +92,8 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     private int tongTienMua(int id) {
+        hoaDonService = new HoaDonServiceImpl();
+
         int tong = 0;
         for (HoaDon hoaDon : hoaDonService.getAll()) {
             if (hoaDon.getKhachHang().getId() == id && hoaDon.getTrangThai() == 1) {
@@ -96,6 +104,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     }
 
     private void updateRankOne(int id) {
+        viewKhachHangService = new KhachHangServiceImpl();
         KhachHang kh = viewKhachHangService.getOne(id);
         if (tongTienMua(id) < 10000000) {
             kh.setCapBac(0);
@@ -108,10 +117,12 @@ public class KhachHangJpanel extends javax.swing.JPanel {
 //        JOptionPane.showMessageDialog(this, "Tổng tiền mua:"+tongTienMua(id)+"\nRank:"+kh.capbac());
     }
 
-    private void updateRankAll() {
+    public void updateRankAll() {
+        viewKhachHangService = new KhachHangServiceImpl();
         for (KhachHang kh : viewKhachHangService.getAll()) {
             updateRankOne(kh.getId());
         }
+
     }
 
     /**
@@ -417,6 +428,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         txtMa.setText((String) tblKhachHang.getValueAt(index, 0));
         txtDiaChi.setText((String) tblKhachHang.getValueAt(index, 4));
         lblCapBac.setText(tblKhachHang.getValueAt(index, 3).toString());
+
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -427,18 +439,15 @@ public class KhachHangJpanel extends javax.swing.JPanel {
         } else if (txtSdt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Sdt không được để trống");
             return;
-        } else if (txtMa.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã KH không được để trống");
-            return;
         } else if (txtDiaChi.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống");
             return;
         }
         KhachHang khachHang = new KhachHang();
+        khachHang.setMa("KH" + viewKhachHangService.getAll().size() + 10);
         khachHang.setTen(txtTen.getText());
         khachHang.setSdt(txtSdt.getText());
         khachHang.setDiaChi(txtDiaChi.getText());
-        khachHang.setMa(String.valueOf(viewKhachHangService.getAll().size() + 1));
         khachHang.setCapBac(0);
 
         if (viewKhachHangService.add(khachHang) == true) {
@@ -474,7 +483,7 @@ public class KhachHangJpanel extends javax.swing.JPanel {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int index = tblKhachHang.getSelectedRow();
-        KhachHang KhachHang = viewKhachHangService.getAll().get(index);
+        KhachHang KhachHang = viewKhachHangService.getOne(getIdKHByMa());
         if (viewKhachHangService.Delete(KhachHang)) {
             JOptionPane.showMessageDialog(this, "Xóa Thành công");
             loadDatakhachHang(viewKhachHangService.getAll());

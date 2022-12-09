@@ -111,13 +111,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtDiaChi" min="-2" pref="235" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -129,7 +129,6 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="txtSdt" alignment="0" pref="235" max="32767" attributes="0"/>
                                       <Component id="txtTen" alignment="0" pref="235" max="32767" attributes="0"/>
-                                      <Component id="txtDiaChi" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="btnThem" min="-2" pref="75" max="-2" attributes="0"/>
@@ -142,7 +141,6 @@
                           </Group>
                       </Group>
                       <Component id="lblCapBac" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTienDo" min="-2" pref="235" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -183,12 +181,7 @@
                                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblCapBac" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel10" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="txtTienDo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtDiaChi" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -201,7 +194,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -289,14 +282,6 @@
             <Property name="text" type="java.lang.String" value="C&#x1ea5;p b&#x1ead;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ti&#x1ebf;n &#x111;&#x1ed9;:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="txtMa">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
@@ -323,8 +308,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="B&#x1ea1;c"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtTienDo">
         </Component>
       </SubComponents>
     </Container>

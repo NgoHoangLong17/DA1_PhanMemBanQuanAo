@@ -544,7 +544,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
         closeWebcam();
-
+        showPanel(new ThongKeJPanel());
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnQuanLyNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyNVMouseEntered

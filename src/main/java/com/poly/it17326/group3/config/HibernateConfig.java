@@ -46,8 +46,7 @@ public class HibernateConfig {
         properties.put(Environment.SHOW_SQL, "true");
         conf.setProperties(properties);
         conf.addAnnotatedClass(SanPham.class);
-        conf.addAnnotatedClass(ChiTietSp.class);
-     
+        conf.addAnnotatedClass(ChiTietSp.class);    
         conf.addAnnotatedClass(DongSp.class);
         conf.addAnnotatedClass(KhuyenMai.class);
         conf.addAnnotatedClass(ChatLieu.class);

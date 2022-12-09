@@ -78,6 +78,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         loadDataCtsp(chiTietSPService.getAll());
         loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getId()));
         lblMaHD.setText("");
+        loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(-1));
     }
 
     private String fomartNgay(Date d) {
@@ -433,7 +434,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         txtKhachTra = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtChuyenKhoan = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnHoaDonTreo = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 0));
 
@@ -706,11 +707,11 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
         txtChuyenKhoan.setEditable(false);
 
-        jButton4.setBackground(new java.awt.Color(255, 204, 204));
-        jButton4.setText("Hóa đơn treo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnHoaDonTreo.setBackground(new java.awt.Color(255, 204, 204));
+        btnHoaDonTreo.setText("Hóa đơn treo");
+        btnHoaDonTreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnHoaDonTreoActionPerformed(evt);
             }
         });
 
@@ -757,8 +758,8 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
                                     .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(btnDatHang, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                            .addComponent(btnHoaDonTreo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -804,7 +805,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(btnHoaDonTreo)
                 .addGap(22, 22, 22))
         );
 
@@ -914,14 +915,15 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
     }//GEN-LAST:event_tblCtspMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnHoaDonTreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonTreoActionPerformed
         // TODO add your handling code here:
         lblMaHD.setText("");
         loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(-1));
-        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getId()));
+        loadDataHoaDon(hoaDonService.getHdWhere(0, UserLogin.getNhanVien().getId()));
         loadDataCtsp(chiTietSPService.getAll());
+        rdoChoThanhToan.setSelected(true);
         lblThanhTien.setText("0 đ");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnHoaDonTreoActionPerformed
 
     private void tblHdctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHdctMouseClicked
         // TODO add your handling code here:
@@ -1023,13 +1025,13 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatHang;
+    private javax.swing.JButton btnHoaDonTreo;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboHinhThucThanhToan;
     private javax.swing.JComboBox<String> cboMaGiamGia;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

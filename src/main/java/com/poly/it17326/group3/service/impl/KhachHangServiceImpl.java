@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group3.service.impl;
 
+import com.poly.it17326.group3.domainmodels.HoaDon;
 import com.poly.it17326.group3.repository.KhachHangRepository;
 import com.poly.it17326.group3.response.KhachHangReponse;
 import com.poly.it17326.group3.domainmodels.KhachHang;
@@ -51,5 +52,10 @@ return  KhachHangRepository.add(KhachHang);
     public KhachHang getOne(int id) {
         return KhachHangRepository.getOne(id);
     }
+
+//    @Override
+//    public Boolean Rank(HoaDon hoaDon) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
 }

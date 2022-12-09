@@ -4,6 +4,7 @@
  */
 package com.poly.it17326.group3.service;
 
+import com.poly.it17326.group3.domainmodels.HoaDon;
 import com.poly.it17326.group3.service.impl.*;
 import com.poly.it17326.group3.service.*;
 import com.poly.it17326.group3.domainmodels.KhachHang;
@@ -26,6 +27,8 @@ public interface ViewKhachHangService {
     
     public List<KhachHang> tim(String Ten);
     
+    //public Boolean Rank(HoaDon hoaDon);
 
+    
      
 }

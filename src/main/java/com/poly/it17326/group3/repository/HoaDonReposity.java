@@ -22,7 +22,14 @@ public class HoaDonReposity {
     private String fromTable = "FROM HoaDon";
 
     public List<HoaDon> getAll() {
-        Query query = session.createQuery(fromTable+" order by id desc", HoaDon.class);
+        Query query = session.createQuery(fromTable + " order by id desc", HoaDon.class);
+        return query.getResultList();
+    }
+
+    public List<HoaDon> getHdWhere(int tt, int id) {
+        Query query = session.createQuery(fromTable + "  where trangThai =:tt and idNhanVien = :id order by id desc", HoaDon.class);
+        query.setParameter("tt", tt);
+        query.setParameter("id", id);
         return query.getResultList();
     }
 
@@ -71,21 +78,21 @@ public class HoaDonReposity {
         query.setParameter("id", id);
         return (HoaDon) query.getSingleResult();
     }
-    
+
     public HoaDon getOneByMaHD(String maHoaDon) {
         String sql = fromTable + " where maHoaDon=:maHoaDon";
         Query query = session.createQuery(sql, HoaDon.class);
         query.setParameter("maHoaDon", maHoaDon);
         return (HoaDon) query.getSingleResult();
     }
-    
-    public List<HoaDon> getHoaDonByIdNV(int maNv){
-        String sql = fromTable +" where idNhanVien=:idnv order by id desc";
-        Query query = session.createQuery(sql,HoaDon.class);
+
+    public List<HoaDon> getHoaDonByIdNV(int maNv) {
+        String sql = fromTable + " where idNhanVien=:idnv order by id desc";
+        Query query = session.createQuery(sql, HoaDon.class);
         query.setParameter("idnv", maNv);
         return query.getResultList();
     }
-    
+
     public static void main(String[] args) {
         for (HoaDon hoaDon : new HoaDonReposity().getHoaDonByIdNV(1)) {
             System.out.println(hoaDon.toString());

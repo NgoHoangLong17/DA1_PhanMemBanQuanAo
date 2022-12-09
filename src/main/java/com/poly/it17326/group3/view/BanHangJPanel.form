@@ -96,13 +96,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoTatCa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoChoThanhToan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoDaThanhToan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="rdoDaHuy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="263" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
@@ -113,10 +113,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoTatCa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoChoThanhToan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoDaThanhToan" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdoDaHuy" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -155,7 +155,7 @@
                 <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch h&#xf3;a &#x111;&#x1a1;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="rdoTatCa">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -166,8 +166,11 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdoTatCaMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="rdoChoThanhToan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -177,8 +180,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ch&#x1edd; thanh to&#xe1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdoChoThanhToanMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+            <Component class="javax.swing.JRadioButton" name="rdoDaThanhToan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -188,8 +194,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#x110;&#xe3; thanh to&#xe1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdoDaThanhToanMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+            <Component class="javax.swing.JRadioButton" name="rdoDaHuy">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -200,7 +209,8 @@
                 <Property name="text" type="java.lang.String" value="&#x110;&#xe3; h&#x1ee7;y"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButton4MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rdoDaHuyMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoDaHuyActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -420,7 +430,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="tblKhach" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Component id="lblTenKH" min="-2" pref="87" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -448,7 +458,7 @@
                                                   <Component id="cboHinhThucThanhToan" pref="171" max="32767" attributes="0"/>
                                                   <Component id="txtKhachTra" max="32767" attributes="0"/>
                                               </Group>
-                                              <Component id="jComboBox1" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                                              <Component id="cboMaGiamGia" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -477,14 +487,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tblKhach" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="lblTenKH" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="lblMaHD" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboMaGiamGia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -531,7 +541,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="tblKhach">
+                <Component class="javax.swing.JLabel" name="lblTenKH">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -595,7 +605,7 @@
                     <Property name="text" type="java.lang.String" value="M&#xe3; gi&#x1ea3;m gi&#xe1;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="cboMaGiamGia">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">

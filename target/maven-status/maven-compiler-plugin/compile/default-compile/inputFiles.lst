@@ -38,6 +38,7 @@ C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\serv
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\reponse\ViewSizeReponse.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\response\SanPhamReponse.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\service\ViewNhanVienService.java
+C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\view\ThongKeJPanel.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\application\Application.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\repository\NhanVienRepository.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\response\ViewNhanVienResponse.java
@@ -53,7 +54,6 @@ C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\repo
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\domainmodels\HoaDonChiTiet.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\repository\HoaDonChiTietReposity.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\service\impl\ViewNhanVienServiceImpl.java
-C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\view\ThuocTinhSanPhamJPanel.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\service\ViewSanPhamService.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\repository\ChucVuRepository.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\view\qrcode.java
@@ -72,6 +72,7 @@ C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\conf
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\response\ChiTietSpReponse.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\response\ViewChucVuResponse.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\domainmodels\ChiTietSp.java
+C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\view\ThuocTinhSapPhamJfame.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\service\ViewChiTietSPService.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\service\ViewDongSpService.java
 C:\Users\ADMIN\OneDrive\Documents\da!\src\main\java\com\poly\it17326\group3\view\NSXJPanel.java

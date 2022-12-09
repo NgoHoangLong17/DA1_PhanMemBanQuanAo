@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group3.service.impl;
 
-
 import com.poly.it17326.group3.domainmodels.ChatLieu;
 import com.poly.it17326.group3.domainmodels.ChiTietSp;
 import com.poly.it17326.group3.domainmodels.DongSp;
@@ -29,8 +28,6 @@ public class ChiTietSpServiceImpl implements ViewChiTietSPService {
     public ArrayList<ChiTietSp> getAll() {
         return chiTietSpRepository.getAll();
     }
-
-   
 
     @Override
     public List<SanPham> getSanPham() {
@@ -81,6 +78,11 @@ public class ChiTietSpServiceImpl implements ViewChiTietSPService {
     @Override
     public ChiTietSp getOne(int id) {
         return chiTietSpRepository.getOne(id);
+    }
+
+    @Override
+    public ChiTietSp getOneByMaCtsp(String ma) {
+        return chiTietSpRepository.getOneByMaCtsp(ma);
     }
 
 }

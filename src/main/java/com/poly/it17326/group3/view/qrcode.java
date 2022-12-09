@@ -35,7 +35,7 @@ public class qrcode {
 //        generateQRcode("1", 600, 600, outputQr);
 //        
 //    }
-    public  void output(int id) throws WriterException{
+    public  void output(String id) throws WriterException{
         generateQRcode(String.valueOf(id), 600, 600,"F:\\"+id+".png");
     }
     

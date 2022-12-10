@@ -183,12 +183,12 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
         model.setColumnIdentifiers(new Object[]{
             //            "id",
-            "machitietsp", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota", "anh"
+            "machitietsp", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota"
         });
         for (ChiTietSp chiTietSanPham : list) {
             Object[] row = new Object[]{chiTietSanPham.getMactsp(), chiTietSanPham.getChatLieu().getTen(), chiTietSanPham.getDongSp().getTen(),
                 chiTietSanPham.getSize().getTen(), chiTietSanPham.getNsx().getTen(), chiTietSanPham.getMauSac().getTen(), chiTietSanPham.getSanPham().getTen(), chiTietSanPham.getSoLuongTon(),
-                chiTietSanPham.getGia(), chiTietSanPham.getMoTa(), chiTietSanPham.getAnh()};
+                chiTietSanPham.getGia(), chiTietSanPham.getMoTa()};
             model.addRow(row);
         }
     }
@@ -230,23 +230,18 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        lblAnh = new javax.swing.JLabel();
         cboNsx = new javax.swing.JComboBox<>();
         cboSanPham = new javax.swing.JComboBox<>();
         cboDongSp = new javax.swing.JComboBox<>();
         cboMauSac = new javax.swing.JComboBox<>();
         cboChatLieu = new javax.swing.JComboBox<>();
         cboSize = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        txtFilePath = new javax.swing.JTextField();
-        jplCam = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnSUa = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnXuat = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         btnNhapExcel = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
@@ -305,9 +300,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
         jLabel12.setText("Noi San Xuat");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 216, 94, 25));
-
-        lblAnh.setText("jLabel13");
-        jPanel1.add(lblAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 160, 203));
 
         cboNsx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboNsx.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -375,19 +367,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         });
         jPanel1.add(cboSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(564, 217, 282, -1));
 
-        jButton7.setText("Nguon anh");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 295, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 295, 130, -1));
-        jPanel1.add(txtFilePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(973, 295, 88, -1));
-
-        jplCam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jplCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 6, 260, 230));
-
         btnThem.setText("Them");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,10 +395,10 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             }
         });
 
-        jButton5.setText("Xuat exel");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnXuat.setText("Xuat exel");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnXuatActionPerformed(evt);
             }
         });
 
@@ -488,8 +467,8 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNhapExcel)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton5)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXuat)
                         .addGap(30, 30, 30)
                         .addComponent(jButton6)
                         .addGap(21, 21, 21))
@@ -508,7 +487,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                     .addComponent(btnSUa)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
-                    .addComponent(jButton5)
+                    .addComponent(btnXuat)
                     .addComponent(jButton6)
                     .addComponent(btnNhapExcel)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -544,14 +523,14 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -581,29 +560,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        String currentDirectoryPath = "F:\\NetBeansProject\\Nhom3_QuanLyBanQuanAo\\nhom3quanlybanquanao\\src\\main\\java\\com\\poly\\it17326\\group3\\anh";
-        JFileChooser imageFileChooser = new JFileChooser(currentDirectoryPath);
-        int imageChooser = imageFileChooser.showOpenDialog(null);
-        imageFileChooser.setDialogTitle("Choose Image...");
-        FileNameExtensionFilter fnef = new FileNameExtensionFilter("Images", "png", "jpg", "jpeg");
-        if (imageChooser == JFileChooser.APPROVE_OPTION) {
-            File imageFile = imageFileChooser.getSelectedFile();
-            String imageFileName = imageFile.getName();
-            String imageFilePath = imageFile.getAbsolutePath();
-            jTextField1.setText(imageFileName);
-
-            ImageIcon imageIcon = new ImageIcon(imageFilePath);
-            Image image = imageIcon.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_SMOOTH);
-
-            ImageIcon resizedImageIcon = new ImageIcon(image);
-            lblAnh.setIcon(resizedImageIcon);
-            txtFilePath.setText(imageFilePath);
-
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
@@ -646,18 +602,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 return;
             }
 
-//              StringBuilder sb = new StringBuilder();
-//         
-//            if(txtGia.getText().isEmpty()  ){
-//                sb.append("Khong duoc trong");
-//            }else{
-//                try {
-//                    int Gia = Integer.parseInt( txtGia.getText());
-//                  
-//                } catch (Exception e) {
-//                 
-//                }
-//            }
             if (Integer.parseInt(txtGia.getText()) == 0) {
                 JOptionPane.showMessageDialog(this, " phai la  so khong dk de trong");
                 return;
@@ -689,13 +633,10 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         txtSoLuongTon.setText(tblChiTietSp.getValueAt(index, 7).toString());
         txtGia.setText(tblChiTietSp.getValueAt(index, 8).toString());
         txtMoTa.setText(tblChiTietSp.getValueAt(index, 9).toString());
-        String imgURL = tblChiTietSp.getValueAt(index, 10).toString();
-        ImageIcon i = new ImageIcon(imgURL);
-        Image image = i.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_SMOOTH);
-        lblAnh.setIcon(i);
+
     }//GEN-LAST:event_tblChiTietSpMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
         // TODO add your handling code here:
         String CurentDirectoryFilePath = "F:\\Học liệu kì 4\\da1";
         JFileChooser execlExportChooser = new JFileChooser(CurentDirectoryFilePath);
@@ -719,7 +660,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             BufferedOutputStream excelBOU;
             try {
                 excelFIS = new FileOutputStream(execlExportChooser.getSelectedFile() + ".xlsx");
-                 execlExportChooser.setDialogTitle("Luu excel... ");
+
                 excelBOU = new BufferedOutputStream(excelFIS);
                 exceSSFWorkbookExprort.write(excelBOU);
                 excelBOU.close();
@@ -728,7 +669,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnXuatActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -775,10 +716,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                     XSSFCell excelSoLuongTon = excelrow.getCell(7);
                     XSSFCell excelGia = excelrow.getCell(8);
                     XSSFCell excelMoTa = excelrow.getCell(9);
-                    XSSFCell excelImage = excelrow.getCell(10);
-                    JLabel excel = new JLabel(new ImageIcon(excelImage.toString()));
+
                     model.addRow(new Object[]{
-                        excelId, excelChatLieu, excelDongSp, excelSize, excelNSx, excelMau, excelSanPham, excelSoLuongTon, excelGia, excelMoTa, excelImage
+                        excelId, excelChatLieu, excelDongSp, excelSize, excelNSx, excelMau, excelSanPham, excelSoLuongTon, excelGia, excelMoTa
                     });
 
                 }
@@ -981,6 +921,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private javax.swing.JButton btnNhapExcel;
     private javax.swing.JButton btnSUa;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXuat;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboDongSp;
     private javax.swing.JComboBox<String> cboMauSac;
@@ -990,9 +931,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -1010,11 +949,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JPanel jplCam;
-    private javax.swing.JLabel lblAnh;
     private javax.swing.JTable tblChiTietSp;
-    private javax.swing.JTextField txtFilePath;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtMaSp;
     private javax.swing.JTextField txtMoTa;

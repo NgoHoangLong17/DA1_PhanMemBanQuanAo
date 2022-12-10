@@ -488,10 +488,10 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
                 sb.append("Mức giảm phải là số\n");
             }
         }
-        if(txtNgayBatDau.getJCalendar().isEnabled()){
+        if(!txtNgayBatDau.getJCalendar().isEnabled()){
             sb.append("Phải chọn ngày bắt đầu\n");
         }
-        if(txtNgayKetThuc.getJCalendar().isEnabled()){
+        if(!txtNgayKetThuc.getJCalendar().isEnabled()){
             sb.append("Phải chọn ngày kết thúc\n");
         }
         if(sb.length()>0){
@@ -551,7 +551,7 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        khuyenMaiRepository.autoHuy(TOOL_TIP_TEXT_KEY);
+        
     }//GEN-LAST:event_btnHuyActionPerformed
 
 

@@ -980,7 +980,7 @@ public class ThuocTinhSapPhamJfame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "da ton tai");
                 return;
             }
-            if (mauSacService.add(mauSac)) {
+            if (mauSacService.update(mauSac)) {
                 JOptionPane.showMessageDialog(this, "them thành công");
                 loadDataMau(mauSacService.getAll());
             }

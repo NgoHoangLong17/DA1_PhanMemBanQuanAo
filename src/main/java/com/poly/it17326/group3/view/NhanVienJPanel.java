@@ -108,7 +108,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     InternetAddress.parse(txtEmail.getText())
             );
             message.setSubject("Mat khau dang nhap");
-            message.setText("Mat khau cua ban la: 1");
+            message.setText("Mat khau cua ban la: 1\n Luu y: Ban can doi mat khau de co the su dung he thong hoan thien");
             Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -684,6 +684,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         }
         List<NhanVien> listNV = viewNhanVienService.getNhanVien();
         NhanVien nhanVien = new NhanVien();
+        String i = "1";
+        nhanVien.autoPass(i);
         nhanVien.setMaNV(zenMaNV(listNV));
         nhanVien.setCccd(txtCccd.getText());
         nhanVien.setTenNhanVien(txtTenNhanVien.getText());

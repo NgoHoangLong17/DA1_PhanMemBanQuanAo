@@ -83,4 +83,10 @@ public class NhanVien {
             return "Đang hoạt động";
         }
     }
+    
+    public String autoPass(String i){
+        i = "1";
+        matKhau = i;
+        return matKhau;
+    }
 }

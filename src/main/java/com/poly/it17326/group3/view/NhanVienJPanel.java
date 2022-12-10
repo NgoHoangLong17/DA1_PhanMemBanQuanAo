@@ -182,8 +182,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         if (txtCccd.getText().isEmpty()) {
             sb.append("Chưa nhập cccd").append("\n");
         } else {
-            String checkCC = "\\d{9,12}";
-            if (!txtCccd.getText().matches(checkCC)) {
+            String checkCmt = "\\d{9}";
+            String checkCC = "\\d{12}";
+            if (!txtCccd.getText().matches(checkCC) && !txtCccd.getText().matches(checkCmt)) {
                 sb.append("Mã cccd sai định dạng").append("\n");
             } else {
                 for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {

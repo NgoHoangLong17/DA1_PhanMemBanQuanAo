@@ -50,7 +50,13 @@ public class ChiTietSpRepository {
         query.setParameter("idchatlieu", idchatlieu);
         query.setParameter("idsize", idsize);
         query.setParameter("idnsx", idnsx);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
 
+    public ArrayList<ChiTietSp> getCheckTonTai(int idsp) {
+        Query query = session.createQuery(fromTable + "  INNER JOIN  SanPham on ChiTietSp.id = SanPham.ID \n"
+                + "where SanPham.ID = :idsp");
+        query.setParameter("idsp", idsp);
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
 
@@ -143,7 +149,7 @@ public class ChiTietSpRepository {
     }
 
     public static void main(String[] args) {
-        List<ChiTietSp> list = new ChiTietSpRepository().getAll();
+        List<ChiTietSp> list = new ChiTietSpRepository().getCheckTonTai(1);
         for (ChiTietSp chiTietSp : list) {
             System.out.println(chiTietSp.toString());
         }

@@ -27,19 +27,21 @@ public class SanPhamServiceImpl implements ViewSanPhamService {
     @Override
     public Boolean update(SanPham sanPham) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
+        sanPhamRepository.update(sanPham);
         return true;
     }
 
     @Override
     public Boolean add(SanPham sanPham) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //  throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sanPhamRepository.add(sanPham);
+        return true;
     }
 
     @Override
     public Boolean Delete(SanPham sanPham) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    return sanPhamRepository.Delete(sanPham);
+        return sanPhamRepository.Delete(sanPham);
     }
 
     @Override

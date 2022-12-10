@@ -12,7 +12,6 @@ E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\impl\H
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\view\ChiTietSpJpanel.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\domainmodels\Size.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\impl\KhuyenMaiServiceImpl.java
-E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\view\ThuocTinhSanPhamJPanel.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\impl\SizeServiceImpl.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\view\MauSacJPanel.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\reponse\MauSacReponse.java
@@ -78,6 +77,7 @@ E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\reponse\ViewSi
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\ViewHoaDonService.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\impl\NSXSeviceImpl.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\repository\GiaoCaReposity.java
+E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\view\ThuocTinhSapPhamJfame.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\service\impl\KhuyenMaiRepository.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\view\SanPhamJpanel.java
 E:\da1\DA1_PhanMemBanQuanAo\src\main\java\com\poly\it17326\group3\reponse\ChiTietSpReponse.java

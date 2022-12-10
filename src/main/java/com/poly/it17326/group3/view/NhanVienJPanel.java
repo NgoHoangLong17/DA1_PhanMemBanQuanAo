@@ -174,17 +174,18 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         if (txtCccd.getText().isEmpty()) {
             sb.append("Chưa nhập cccd").append("\n");
         } else {
-//            String checkSDT = "\\d{12}";
-//            if (!txtSDT.getText().matches(checkSDT)) {
-//                sb.append("Mã cccd sai định dạng").append("\n");
-//            } else {
+            String checkCC = "\\d{9,12}";
+            if (!txtCccd.getText().matches(checkCC)) {
+                sb.append("Mã cccd sai định dạng").append("\n");
+            } else {
                 for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
                     if (nhanVien.getCccd().equals(txtCccd.getText())) {
                         sb.append("Mã cccd đã được sử dụng").append("\n");
                     }
                 }
             }
-//        if (txtNgaySinh.getJCalendar().isEnabled()) {
+        }
+//        if (!txtNgaySinh.getJCalendar().isEnabled()) {
 //            sb.append("Chưa nhập ngày sinh").append("\n");
 //        }
         if (txtSDT.getText().isEmpty()) {

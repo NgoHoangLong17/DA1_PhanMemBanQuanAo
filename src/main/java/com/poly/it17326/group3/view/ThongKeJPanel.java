@@ -792,12 +792,12 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             message.setFrom(new InternetAddress("tranviethung271003@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("oanhphe66@gmail.com")
+                    InternetAddress.parse("longnhph27503@fpt.edu.vn")
             );
             message.setSubject("Doanh thu");
-            message.setText("Doanh thu theo ngày: " + txtDtNgay.getText() + "\n"
-                    + "Doanh thu theo tháng: " + txtDtThang.getText() + "\n"
-                    + "Doanh thu theo năm: " + txtNam.getText()
+            message.setText(""
+                    + "Doanh thu theo thang: " + txtDtThang.getText() + "\n"
+                    + "Doanh thu theo nam: " + txtNam.getText()
             );
 
             Transport.send(message);

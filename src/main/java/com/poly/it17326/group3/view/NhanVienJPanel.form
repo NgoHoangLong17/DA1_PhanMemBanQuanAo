@@ -281,7 +281,7 @@
                           <Component id="rbnNu" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtMaNV" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtId" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtSTT" alignment="0" max="32767" attributes="0"/>
                       <Component id="cboChucVu" pref="300" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="100" max="32767" attributes="0"/>
@@ -384,7 +384,7 @@
                           </Group>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="txtId" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="txtSTT" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -420,7 +420,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTenNhanVien">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtId">
+        <Component class="javax.swing.JTextField" name="txtSTT">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -458,7 +458,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ID :"/>
+            <Property name="text" type="java.lang.String" value="STT :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSDT">
@@ -522,7 +522,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnThem" alignment="1" pref="85" max="32767" attributes="0"/>
                           <Component id="btnSua" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnXoa" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnXuatFile" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
@@ -536,7 +536,7 @@
                       <EmptySpace pref="40" max="32767" attributes="0"/>
                       <Component id="btnSua" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnXoa" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnXuatFile" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnNew" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
@@ -568,12 +568,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnXoa">
+            <Component class="javax.swing.JButton" name="btnXuatFile">
               <Properties>
-                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatFileActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

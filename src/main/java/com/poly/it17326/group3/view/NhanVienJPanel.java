@@ -18,14 +18,22 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -63,7 +71,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private void LoadTable(ArrayList<NhanVien> listNhanVien) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         defaultTableModel = (DefaultTableModel) tbNhanVien.getModel();
-        defaultTableModel.setColumnIdentifiers(new String[]{"ID", "Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
+        defaultTableModel.setColumnIdentifiers(new String[]{"STT", "Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
         defaultTableModel.setRowCount(0);
         for (NhanVien nhanVien : listNhanVien) {
             defaultTableModel.addRow(new Object[]{nhanVien.getId(), nhanVien.getMaNV(), nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
@@ -118,7 +126,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     }
 
     public void loadTextFile(int row) {
-        txtId.setText(tbNhanVien.getValueAt(row, 0).toString());
+        txtSTT.setText(tbNhanVien.getValueAt(row, 0).toString());
         txtMaNV.setText(tbNhanVien.getValueAt(row, 1).toString());
         txtCccd.setText(tbNhanVien.getValueAt(row, 2).toString());
         txtTenNhanVien.setText(tbNhanVien.getValueAt(row, 3).toString());
@@ -237,7 +245,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtTenNhanVien = new javax.swing.JTextField();
-        txtId = new javax.swing.JTextField();
+        txtSTT = new javax.swing.JTextField();
         rbnNam = new javax.swing.JRadioButton();
         rbnNu = new javax.swing.JRadioButton();
         cboChucVu = new javax.swing.JComboBox<>();
@@ -256,7 +264,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         btnNew = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+        btnXuatFile = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtCccd = new javax.swing.JTextField();
         txtNgaySinh = new com.toedter.calendar.JDateChooser();
@@ -405,7 +413,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Ngày Sinh");
 
-        txtId.setEditable(false);
+        txtSTT.setEditable(false);
 
         buttonGroup1.add(rbnNam);
         rbnNam.setText("Nam");
@@ -415,7 +423,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel2.setText("ID :");
+        jLabel2.setText("STT :");
 
         jLabel7.setText("SĐT:");
 
@@ -460,10 +468,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatFile.setText("Xuất file");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
+                btnXuatFileActionPerformed(evt);
             }
         });
 
@@ -477,7 +485,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnThem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                     .addComponent(btnSua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnXuatFile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
         jPanel4Layout.setVerticalGroup(
@@ -488,7 +496,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnXuatFile, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -519,7 +527,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addGap(43, 43, 43)
                         .addComponent(rbnNu, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSTT, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboChucVu, 0, 300, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,7 +605,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                             .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSTT, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -631,7 +639,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
-        txtId.setText(null);
+        txtSTT.setText(null);
         txtMaNV.setText(null);
         txtCccd.setText(null);
         txtTenNhanVien.setText(null);
@@ -649,7 +657,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private void tbNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNhanVienMouseClicked
         // TODO add your handling code here:
         int row = tbNhanVien.getSelectedRow();
-        txtId.setText(tbNhanVien.getValueAt(row, 0).toString());
+        txtSTT.setText(tbNhanVien.getValueAt(row, 0).toString());
         txtMaNV.setText(tbNhanVien.getValueAt(row, 1).toString());
         txtCccd.setText(tbNhanVien.getValueAt(row, 2).toString());
         txtTenNhanVien.setText(tbNhanVien.getValueAt(row, 3).toString());
@@ -717,19 +725,38 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
         // TODO add your handling code here:
-        int index = tbNhanVien.getSelectedRow();
-        NhanVien nhanVien = viewNhanVienService.getNhanVien().get(index);
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại");
-        } else if (viewNhanVienService.xoa(nhanVien)) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-            LoadTable((ArrayList<NhanVien>) viewNhanVienService.getNhanVien());
-        } else {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        String CurentDirectoryFilePath = "C:\\Users\\user\\Documents\\DA1_XuatNhanVien";
+        JFileChooser execlExportChooser = new JFileChooser(CurentDirectoryFilePath);
+        FileNameExtensionFilter excelFNEF = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        execlExportChooser.setFileFilter(excelFNEF);
+        execlExportChooser.setDialogTitle("Save excel... ");
+
+        int excelChooser = execlExportChooser.showSaveDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            XSSFWorkbook exceSSFWorkbookExprort = new XSSFWorkbook();
+            XSSFSheet excelSheet = exceSSFWorkbookExprort.createSheet("Danh Sach");
+            for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
+                XSSFRow excelRow = excelSheet.createRow(i);
+                for (int j = 0; j < defaultTableModel.getColumnCount(); j++) {
+                    XSSFCell excelCell = excelRow.createCell(j);
+                    excelCell.setCellValue(defaultTableModel.getValueAt(i, j).toString());
+                }
+            }
+            FileOutputStream excelFIS;
+            BufferedOutputStream excelBOU;
+            try {
+                excelFIS = new FileOutputStream(execlExportChooser.getSelectedFile() + ".xlsx");
+                excelBOU = new BufferedOutputStream(excelFIS);
+                exceSSFWorkbookExprort.write(excelBOU);
+                excelBOU.close();
+                exceSSFWorkbookExprort.close();
+                JOptionPane.showMessageDialog(this, "Xuất danh sách thành công");
+            } catch (Exception e) {
+            }
         }
-    }//GEN-LAST:event_btnXoaActionPerformed
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void chekNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekNghiActionPerformed
         // TODO add your handling code here:
@@ -824,7 +851,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
-    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnXuatFile;
     private javax.swing.JButton btntien;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChucVu;
@@ -854,10 +881,10 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtCccd;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMaNV;
     private com.toedter.calendar.JDateChooser txtNgaySinh;
     private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtSTT;
     private javax.swing.JTextField txtTenNhanVien;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables

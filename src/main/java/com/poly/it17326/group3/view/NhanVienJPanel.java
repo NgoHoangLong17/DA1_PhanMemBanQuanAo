@@ -74,7 +74,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         defaultTableModel.setColumnIdentifiers(new String[]{"STT", "Mã nhân viên", "CCCD", "Tên nhân viên", "Chức vụ", "Giới tính", "Email", "Ngày sinh", "SĐT", "Địa chỉ", "Trạng thái"});
         defaultTableModel.setRowCount(0);
         for (NhanVien nhanVien : listNhanVien) {
-            defaultTableModel.addRow(new Object[]{nhanVien.getStt(), nhanVien.getMaNV(), nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
+            defaultTableModel.addRow(new Object[]{nhanVien.getId(), nhanVien.getMaNV(), nhanVien.getCccd(), nhanVien.getTenNhanVien(), nhanVien.getChucVu().getTenChucVu(),
                 nhanVien.htGioiTinh(), nhanVien.getEmail(), doiNgay(nhanVien.getNgaySinh()), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.htDeleted()});
         }
     }

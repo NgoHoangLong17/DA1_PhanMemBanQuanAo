@@ -81,7 +81,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         hoaDonChiTietService = new HoaDonChiTietServiceImpl();
         khachHangService = new KhachHangServiceImpl();
         loadDataCtsp(chiTietSPService.getAll());
-        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getStt()));
+        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getId()));
         lblMaHD.setText("");
     }
 
@@ -111,7 +111,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         if (hoaDonService.save(hd)) {
             JOptionPane.showMessageDialog(this, "Tạo hóa đơn thành công!");
         }
-        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getStt()));
+        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getId()));
         tblHoaDon.setRowSelectionInterval(0, 0);
         lblMaHD.setText(getMaHd());
     }
@@ -849,7 +849,7 @@ private void xuatHdDiXin(){
         // TODO add your handling code here:
         lblMaHD.setText("");
         loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(-1));
-        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getStt()));
+        loadDataHoaDon(hoaDonService.getHoaDonByIdNV(UserLogin.getNhanVien().getId()));
         loadDataCtsp(chiTietSPService.getAll());
         lblThanhTien.setText("0 đ");
     }//GEN-LAST:event_jButton4ActionPerformed

@@ -26,7 +26,7 @@ public class ViewNhanVienResponse {
     private Boolean deleted;
     
 public  ViewNhanVienResponse(NhanVien nhanVien){
-    this.nhanVienId = nhanVien.getStt();
+    this.nhanVienId = nhanVien.getId();
     this.tenNhanVien = nhanVien.getTenNhanVien();
     this.tenChucVu = nhanVien.getChucVu().getTenChucVu();
     this.gioiTinh = nhanVien.getGioiTinh();

@@ -32,7 +32,7 @@ public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer stt;
+    private Integer id;
 
     @Column(name="MaNV")
     private String maNV;

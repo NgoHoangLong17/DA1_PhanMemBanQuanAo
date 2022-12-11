@@ -36,7 +36,7 @@ public class qrcode {
 //        
 //    }
     public  void output(String id) throws WriterException{
-        generateQRcode(String.valueOf(id), 600, 600,"F:\\"+id+".png");
+        generateQRcode(id, 600, 600,"c:\\pdf\\"+id+".png");
     }
     
 }

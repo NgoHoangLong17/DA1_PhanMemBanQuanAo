@@ -33,12 +33,15 @@ public class NhanVien {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    @Column(name="MaNV")
+    private String maNV;
+    
+    @Column(name ="cccd")
+    private String cccd;
     
     @Column(name = "ten")
     private String tenNhanVien;
-    
-    @Column(name="MaNV")
-    private String maNV;
     
     @Column(name = "gioiTinh")
     private Boolean gioiTinh;
@@ -60,6 +63,7 @@ public class NhanVien {
     
     @Column(name = "Email")
     private String email;
+    
     @ManyToOne
     @JoinColumn(name = "IdChucVu",referencedColumnName = "id" )
     private ChucVu chucVu;
@@ -78,5 +82,11 @@ public class NhanVien {
         }else{
             return "Đang hoạt động";
         }
+    }
+    
+    public String autoPass(String i){
+        i = "1";
+        matKhau = i;
+        return matKhau;
     }
 }

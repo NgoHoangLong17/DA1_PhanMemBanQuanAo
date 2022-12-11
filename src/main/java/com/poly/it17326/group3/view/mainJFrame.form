@@ -103,7 +103,7 @@
         <Component class="javax.swing.JLabel" name="lblThoat">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Data\Nhom3_QuanLyBanQuanAo\nhom3quanlybanquanao\src\main\resources\com\poly\it17326\group3\icon\icons8-macos-close-30.png"/>
+              <Image iconType="3" name="/com/poly/it17326/group3/icon/icons8-macos-close-30.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -116,7 +116,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Data\Nhom3_QuanLyBanQuanAo\nhom3quanlybanquanao\src\main\resources\com\poly\it17326\group3\icon\icons8-macos-minimize-30.png"/>
+              <Image iconType="3" name="/com/poly/it17326/group3/icon/icons8-macos-minimize-30.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -147,7 +147,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnThongKe" max="32767" attributes="0"/>
@@ -155,12 +155,12 @@
                       <Component id="btnQuanLyKH" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnLichSuGD" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnKhuyenMai" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGiaoCa" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnTrangChu" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnQuanLyNV" alignment="1" max="32767" attributes="0"/>
                       <Component id="lblTenNV" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnQuanLySP" alignment="1" max="32767" attributes="0"/>
                       <Component id="lblChucVu" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnThongKe1" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -184,14 +184,14 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnKhuyenMai" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnGiaoCa" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnQuanLyNV" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnQuanLySP" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnThongKe" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnThongKe1" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -225,16 +225,6 @@
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnKhuyenMaiMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnKhuyenMaiMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhuyenMaiActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnGiaoCa">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; giao ca"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGiaoCaMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnGiaoCaMouseExited"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGiaoCaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTrangChu">
@@ -297,6 +287,9 @@
                   <Image iconType="3" name="/com/poly/it17326/group3/icon/icons8-customer-100.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -319,6 +312,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="CV"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnThongKe1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnThongKe1MouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnThongKe1MouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThongKe1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -175,6 +175,7 @@ Random random = new Random();
             vqmks.changePassword(ma,matKhau);
             JOptionPane.showMessageDialog(this, "Mật khẩu đã được cập nhật");
             this.dispose();
+            new DangNhapJFrame().setVisible(true);
         }
        
     }//GEN-LAST:event_btnXacNhanActionPerformed

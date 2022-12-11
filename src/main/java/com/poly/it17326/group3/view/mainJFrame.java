@@ -4,7 +4,11 @@
  */
 package com.poly.it17326.group3.view;
 
+
 import com.poly.it17326.group3.repository.KhachHangRepository;
+
+import com.poly.it17326.group3.domainmodels.NhanVien;
+
 import java.awt.Color;
 import java.util.Calendar;
 import javax.swing.JButton;
@@ -56,8 +60,6 @@ public class mainJFrame extends javax.swing.JFrame {
     private void defaultHover() {
         btnTrangChu.setBackground(Color.white);
         btnTrangChu.setForeground(Color.red);
-        btnGiaoCa.setBackground(Color.white);
-        btnGiaoCa.setForeground(Color.red);
         btnKhuyenMai.setBackground(Color.white);
         btnKhuyenMai.setForeground(Color.red);
         btnThongKe.setBackground(Color.white);
@@ -119,7 +121,6 @@ public class mainJFrame extends javax.swing.JFrame {
         btnQuanLyKH = new javax.swing.JButton();
         btnLichSuGD = new javax.swing.JButton();
         btnKhuyenMai = new javax.swing.JButton();
-        btnGiaoCa = new javax.swing.JButton();
         btnTrangChu = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnQuanLyNV = new javax.swing.JButton();
@@ -128,6 +129,7 @@ public class mainJFrame extends javax.swing.JFrame {
         lblTenNV = new javax.swing.JLabel();
         btnQuanLySP = new javax.swing.JButton();
         lblChucVu = new javax.swing.JLabel();
+        btnThongKe1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -143,7 +145,7 @@ public class mainJFrame extends javax.swing.JFrame {
         lblDongHo.setForeground(new java.awt.Color(255, 255, 0));
         lblDongHo.setText("12:00:00 PM");
 
-        lblThoat.setIcon(new javax.swing.ImageIcon("C:\\Data\\Nhom3_QuanLyBanQuanAo\\nhom3quanlybanquanao\\src\\main\\resources\\com\\poly\\it17326\\group3\\icon\\icons8-macos-close-30.png")); // NOI18N
+        lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/poly/it17326/group3/icon/icons8-macos-close-30.png"))); // NOI18N
         lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,7 +153,7 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Data\\Nhom3_QuanLyBanQuanAo\\nhom3quanlybanquanao\\src\\main\\resources\\com\\poly\\it17326\\group3\\icon\\icons8-macos-minimize-30.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/poly/it17326/group3/icon/icons8-macos-minimize-30.png"))); // NOI18N
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -233,21 +235,6 @@ public class mainJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnGiaoCa.setText("Quản lý giao ca");
-        btnGiaoCa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGiaoCaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGiaoCaMouseExited(evt);
-            }
-        });
-        btnGiaoCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGiaoCaActionPerformed(evt);
-            }
-        });
-
         btnTrangChu.setText("Bán hàng");
         btnTrangChu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -296,6 +283,11 @@ public class mainJFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/poly/it17326/group3/icon/icons8-customer-100.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -330,6 +322,21 @@ public class mainJFrame extends javax.swing.JFrame {
 
         lblChucVu.setText("CV");
 
+        btnThongKe1.setText("Đăng xuất");
+        btnThongKe1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnThongKe1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnThongKe1MouseExited(evt);
+            }
+        });
+        btnThongKe1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKe1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -342,12 +349,12 @@ public class mainJFrame extends javax.swing.JFrame {
                     .addComponent(btnQuanLyKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLichSuGD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGiaoCa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTrangChu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuanLyNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnQuanLySP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThongKe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -368,14 +375,14 @@ public class mainJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnGiaoCa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnQuanLyNV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnQuanLySP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnThongKe1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -468,6 +475,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnLichSuGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichSuGDActionPerformed
         // TODO add your handling code here:
+        showPanel(new LichSuGiaoDichJPanel());
         closeWebcam();
     }//GEN-LAST:event_btnLichSuGDActionPerformed
 
@@ -482,26 +490,14 @@ public class mainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhuyenMaiMouseExited
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+
         // TODO add your handling code here:
         closeWebcam();
+
+
+        showPanel(new KhuyenMaiJPanel());
 
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
-
-    private void btnGiaoCaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGiaoCaMouseEntered
-        // TODO add your handling code here:
-        hover(btnGiaoCa);
-    }//GEN-LAST:event_btnGiaoCaMouseEntered
-
-    private void btnGiaoCaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGiaoCaMouseExited
-        // TODO add your handling code here:
-        defaultHover();
-    }//GEN-LAST:event_btnGiaoCaMouseExited
-
-    private void btnGiaoCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaoCaActionPerformed
-        // TODO add your handling code here:
-        closeWebcam();
-
-    }//GEN-LAST:event_btnGiaoCaActionPerformed
 
     private void btnTrangChuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrangChuMouseEntered
         // TODO add your handling code here:
@@ -540,7 +536,7 @@ public class mainJFrame extends javax.swing.JFrame {
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         // TODO add your handling code here:
         closeWebcam();
-
+        showPanel(new ThongKeJPanel());
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnQuanLyNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuanLyNVMouseEntered
@@ -555,7 +551,11 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnQuanLyNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNVActionPerformed
         // TODO add your handling code here:
+
         closeWebcam();
+
+
+        showPanel(new NhanVienJPanel());
 
     }//GEN-LAST:event_btnQuanLyNVActionPerformed
 
@@ -577,18 +577,39 @@ public class mainJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnQuanLySPActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        new ThongTinCaNhanJFrame().setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnThongKe1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKe1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThongKe1MouseEntered
+
+    private void btnThongKe1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKe1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThongKe1MouseExited
+
+    private void btnThongKe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKe1ActionPerformed
+        // TODO add your handling code here:
+        closeWebcam();
+        this.dispose();
+        
+        new DangNhapJFrame().setVisible(true);
+    }//GEN-LAST:event_btnThongKe1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGiaoCa;
     private javax.swing.JButton btnKhuyenMai;
     private javax.swing.JButton btnLichSuGD;
     private javax.swing.JButton btnQuanLyKH;
     private javax.swing.JButton btnQuanLyNV;
     private javax.swing.JButton btnQuanLySP;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnThongKe1;
     private javax.swing.JButton btnTrangChu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;

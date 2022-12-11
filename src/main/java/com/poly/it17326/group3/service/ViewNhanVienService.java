@@ -19,4 +19,6 @@ public interface ViewNhanVienService {
     Boolean sua(NhanVien nhanVien);
     
     Boolean xoa(NhanVien nhanVien);
+    
+    NhanVien getOne(Integer id);
 }

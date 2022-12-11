@@ -20,4 +20,6 @@ public interface ViewKhuyenMaiService {
     Boolean update(KhuyenMai km);
 
     Boolean delete(KhuyenMai km);
+    
+    public List<KhuyenMai> tim(String Ten);
 }

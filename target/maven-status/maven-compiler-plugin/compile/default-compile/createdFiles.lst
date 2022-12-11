@@ -66,7 +66,6 @@ com\poly\it17326\group3\view\BanHangJPanel$12.class
 com\poly\it17326\group3\service\ViewDongSpService.class
 com\poly\it17326\group3\view\KhachHangJpanel.class
 com\poly\it17326\group3\view\SizeJPanel$3.class
-com\poly\it17326\group3\view\BanHangJPanel$18.class
 com\poly\it17326\group3\view\KhuyenMaiJframe.class
 com\poly\it17326\group3\view\mainJFrame$17.class
 com\poly\it17326\group3\view\ChiTietSpJpanel$11.class
@@ -97,6 +96,7 @@ com\poly\it17326\group3\view\ThongKeJPanel$10.class
 com\poly\it17326\group3\domainmodels\GiaoCa.class
 com\poly\it17326\group3\view\mainJFrame$21.class
 com\poly\it17326\group3\view\KhuyenMaiJframe$1.class
+com\poly\it17326\group3\view\LichSuGiaoDichJPanel$6.class
 com\poly\it17326\group3\view\ThongKeJPanel$4.class
 com\poly\it17326\group3\view\SanPhamJpanel$4.class
 com\poly\it17326\group3\view\KhachHangJpanel$8.class
@@ -199,6 +199,7 @@ com\poly\it17326\group3\view\BanHangJPanel$4.class
 com\poly\it17326\group3\view\BanHangJPanel$13.class
 com\poly\it17326\group3\response\ChiTietSpReponse.class
 com\poly\it17326\group3\view\ChatLieuJPanel$1.class
+com\poly\it17326\group3\view\ChiTietSpJpanel$23.class
 com\poly\it17326\group3\repository\SizeRepository.class
 com\poly\it17326\group3\view\ChatLieuJPanel$2.class
 com\poly\it17326\group3\view\KHJFrame.class
@@ -226,6 +227,7 @@ com\poly\it17326\group3\view\NSXJPanel$2.class
 com\poly\it17326\group3\repository\NSXRepositpry.class
 com\poly\it17326\group3\service\impl\ViewNhanVienServiceImpl.class
 com\poly\it17326\group3\view\DoiMatKhauView.class
+com\poly\it17326\group3\view\ThongKeJPanel$15.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$7.class
 com\poly\it17326\group3\service\impl\SizeServiceImpl.class
 com\poly\it17326\group3\view\BanHangJPanel$2.class
@@ -254,6 +256,7 @@ com\poly\it17326\group3\view\Test$1.class
 com\poly\it17326\group3\view\DangNhapJPanel$1.class
 com\poly\it17326\group3\view\MauSacJPanel.class
 com\poly\it17326\group3\domainmodels\MauSac.class
+com\poly\it17326\group3\view\ChiTietSpJpanel$24.class
 com\poly\it17326\group3\view\DongSpJPanel$2.class
 com\poly\it17326\group3\view\ThongKeJPanel$7.class
 com\poly\it17326\group3\view\KhuyenMaiJframe$4.class
@@ -266,6 +269,7 @@ com\poly\it17326\group3\view\mainJFrame$12.class
 com\poly\it17326\group3\view\ThongKeJPanel$13.class
 com\poly\it17326\group3\view\KhachHangJpanel$1.class
 com\poly\it17326\group3\domainmodels\SanPham.class
+com\poly\it17326\group3\view\ChiTietSpJpanel$26.class
 com\poly\it17326\group3\view\UserLogin.class
 com\poly\it17326\group3\view\NhanVienJPanel$12.class
 com\poly\it17326\group3\view\QuenMatKhau$2.class
@@ -279,6 +283,7 @@ com\poly\it17326\group3\view\KHJFrame$3.class
 com\poly\it17326\group3\view\NhanVienJPanel$4.class
 com\poly\it17326\group3\view\KhuyenMaiJPanel$1.class
 com\poly\it17326\group3\view\QuenMatKhau$1.class
+com\poly\it17326\group3\view\ChiTietSpJpanel$25.class
 com\poly\it17326\group3\view\DangNhapJPanel$2.class
 com\poly\it17326\group3\view\ThongKeJPanel$14.class
 com\poly\it17326\group3\service\impl\ViewChucVuServiceImpl.class

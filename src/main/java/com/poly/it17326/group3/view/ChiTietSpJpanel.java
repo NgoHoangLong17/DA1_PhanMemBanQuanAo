@@ -69,12 +69,23 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private WebcamPanel panel = null;
     public Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
-    ArrayList<ChiTietSp> list = new ArrayList<>();
+    List<ChiTietSp> list = chiTietSpServiceImpl.getAll();
 
     /**
      * Creates new form ChiTietSpJpanel
      */
-   
+    public void initWebcam() {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+
+//        jplCam.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 300));
+        executor.execute(this);
+    }
 
     @Override
     public void run() {
@@ -113,7 +124,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     }
 
     public String zenMaNV(List<ChiTietSp> listNV) {
-        String ma = "MaCtsp";
+        String ma = "SP";
         return ma + String.valueOf(listNV.size() + 1);
     }
 
@@ -171,17 +182,32 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         model.setRowCount(0);
 
         model.setColumnIdentifiers(new Object[]{
-            //            "id",
-            "STT","machitietsp", "chatlieu", "dongsp", "size", "nsx", "mausac", "sanpham", "soluongton", "gia", "mota"
+            "STT", "Mã CTSP", "Tên sản phẩm", "Chất liệu", "Dòng sản phẩm", "Size", "NSX", "Màu sắc", "Số lượng", "Đơn giá"
         });
-        int i=1;
+        int i = 1;
         for (ChiTietSp chiTietSanPham : list) {
-            Object[] row = new Object[]{i,chiTietSanPham.getMactsp(), chiTietSanPham.getChatLieu().getTen(), chiTietSanPham.getDongSp().getTen(),
-                chiTietSanPham.getSize().getTen(), chiTietSanPham.getNsx().getTen(), chiTietSanPham.getMauSac().getTen(), chiTietSanPham.getSanPham().getTen(), chiTietSanPham.getSoLuongTon(),
+            Object[] row = new Object[]{i, chiTietSanPham.getMactsp(),chiTietSanPham.getSanPham().getTen(),  chiTietSanPham.getChatLieu().getTen(), chiTietSanPham.getDongSp().getTen(),
+                chiTietSanPham.getSize().getTen(), chiTietSanPham.getNsx().getTen(), chiTietSanPham.getMauSac().getTen(), chiTietSanPham.getSoLuongTon(),
                 chiTietSanPham.getGia(), chiTietSanPham.getMoTa()};
             model.addRow(row);
             i++;
         }
+    }
+
+    public void showdata(int index) {
+
+        index = tblChiTietSp.getSelectedRow();
+
+        txtMaSp.setText(tblChiTietSp.getValueAt(index, 0).toString());
+        cboChatLieu.setSelectedItem(tblChiTietSp.getValueAt(index, 1));
+        cboDongSp.setSelectedItem(tblChiTietSp.getValueAt(index, 2));
+        cboSize.setSelectedItem(tblChiTietSp.getValueAt(index, 3));
+        cboNsx.setSelectedItem(tblChiTietSp.getValueAt(index, 4));
+        cboMauSac.setSelectedItem(tblChiTietSp.getValueAt(index, 5));
+        cboSanPham.setSelectedItem(tblChiTietSp.getValueAt(index, 6));
+        txtSoLuongTon.setText(tblChiTietSp.getValueAt(index, 7).toString());
+        txtGia.setText(tblChiTietSp.getValueAt(index, 8).toString());
+        txtMoTa.setText(tblChiTietSp.getValueAt(index, 9).toString());
     }
 
     public ChiTietSpJpanel() {
@@ -231,17 +257,21 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         btnThem = new javax.swing.JButton();
         btnSUa = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnXuat = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         btnNhapExcel = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChiTietSp = new javax.swing.JTable();
+        btntien = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -462,17 +492,10 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             }
         });
 
-        jButton4.setText("Tim Kiem");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnXuat.setText("Xuat exel");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Xuat exel");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnXuatActionPerformed(evt);
             }
         });
 
@@ -513,10 +536,17 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             }
         });
 
-        jButton1.setText("LoadCbo");
+        jButton1.setText("Load");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Lam moi");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -533,22 +563,22 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                         .addComponent(btnSUa)
                         .addGap(29, 29, 29)
                         .addComponent(jButton3)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton4)
-                        .addGap(43, 43, 43)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton8)
-                        .addGap(102, 102, 102)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addComponent(btnNhapExcel)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton5)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnXuat)
                         .addGap(30, 30, 30)
                         .addComponent(jButton6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -559,8 +589,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                     .addComponent(btnThem)
                     .addComponent(btnSUa)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
+                    .addComponent(btnXuat)
                     .addComponent(jButton6)
                     .addComponent(btnNhapExcel)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -568,7 +597,8 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -590,21 +620,64 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         });
         jScrollPane1.setViewportView(tblChiTietSp);
 
+        btntien.setText("|<<");
+        btntien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntienActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("<<");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText(">>");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setText(">>|");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1077, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(btntien)
+                .addGap(51, 51, 51)
+                .addComponent(jButton7)
+                .addGap(59, 59, 59)
+                .addComponent(jButton10)
+                .addGap(62, 62, 62)
+                .addComponent(jButton11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btntien)
+                    .addComponent(jButton7)
+                    .addComponent(jButton10)
+                    .addComponent(jButton11))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -613,14 +686,12 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -672,25 +743,16 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             chiTietSp.setGia(Integer.parseInt(txtGia.getText()));
             chiTietSp.setMoTa(txtMoTa.getText());
 
-
+            if (Integer.parseInt(txtGia.getText()) <= 0) {
+                JOptionPane.showMessageDialog(this, "k dung dinh dang ");
+                return;
+            }
 
             if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
                 JOptionPane.showMessageDialog(this, "that bai");
                 return;
             }
 
-//              StringBuilder sb = new StringBuilder();
-//         
-//            if(txtGia.getText().isEmpty()  ){
-//                sb.append("Khong duoc trong");
-//            }else{
-//                try {
-//                    int Gia = Integer.parseInt( txtGia.getText());
-//                  
-//                } catch (Exception e) {
-//                 
-//                }
-//            }
             if (Integer.parseInt(txtGia.getText()) == 0) {
                 JOptionPane.showMessageDialog(this, " phai la  so khong dk de trong");
                 return;
@@ -711,22 +773,24 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private void tblChiTietSpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSpMouseClicked
         // TODO add your handling code here:
         int index = tblChiTietSp.getSelectedRow();
+        String ma = tblChiTietSp.getValueAt(index, 1).toString();
+        txtMaSp.setText(ma);
+        ChiTietSp ctsp = chiTietSpRepository.getOneByMaCtsp(ma);
 
-        txtMaSp.setText(tblChiTietSp.getValueAt(index, 0).toString());
-        cboChatLieu.setSelectedItem(tblChiTietSp.getValueAt(index, 1));
-        cboDongSp.setSelectedItem(tblChiTietSp.getValueAt(index, 2));
-        cboSize.setSelectedItem(tblChiTietSp.getValueAt(index, 3));
-        cboNsx.setSelectedItem(tblChiTietSp.getValueAt(index, 4));
-        cboMauSac.setSelectedItem(tblChiTietSp.getValueAt(index, 5));
-        cboSanPham.setSelectedItem(tblChiTietSp.getValueAt(index, 6));
-        txtSoLuongTon.setText(tblChiTietSp.getValueAt(index, 7).toString());
-        txtGia.setText(tblChiTietSp.getValueAt(index, 8).toString());
-        txtMoTa.setText(tblChiTietSp.getValueAt(index, 9).toString());
-        String imgURL = tblChiTietSp.getValueAt(index, 10).toString();
-        
+        cboChatLieu.setSelectedItem(ctsp.getChatLieu().getTen());
+        cboDongSp.setSelectedItem(ctsp.getDongSp().getTen());
+        cboSize.setSelectedItem(ctsp.getSize().getTen());
+        cboNsx.setSelectedItem(ctsp.getNsx().getTen());
+        cboMauSac.setSelectedItem(ctsp.getMauSac().getTen());
+        cboSanPham.setSelectedItem(ctsp.getSanPham().getTen());
+        txtSoLuongTon.setText(ctsp.getSoLuongTon() + "");
+        txtGia.setText(ctsp.getGia() + "");
+        txtMoTa.setText(ctsp.getMoTa());
+
+
     }//GEN-LAST:event_tblChiTietSpMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
         // TODO add your handling code here:
         String CurentDirectoryFilePath = "C:\\pdf";
         JFileChooser execlExportChooser = new JFileChooser(CurentDirectoryFilePath);
@@ -750,7 +814,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             BufferedOutputStream excelBOU;
             try {
                 excelFIS = new FileOutputStream(execlExportChooser.getSelectedFile() + ".xlsx");
-                 execlExportChooser.setDialogTitle("Luu excel... ");
+
                 excelBOU = new BufferedOutputStream(excelFIS);
                 exceSSFWorkbookExprort.write(excelBOU);
                 excelBOU.close();
@@ -759,7 +823,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnXuatActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -806,10 +870,9 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                     XSSFCell excelSoLuongTon = excelrow.getCell(7);
                     XSSFCell excelGia = excelrow.getCell(8);
                     XSSFCell excelMoTa = excelrow.getCell(9);
-                    XSSFCell excelImage = excelrow.getCell(10);
-                    JLabel excel = new JLabel(new ImageIcon(excelImage.toString()));
+
                     model.addRow(new Object[]{
-                        excelId, excelChatLieu, excelDongSp, excelSize, excelNSx, excelMau, excelSanPham, excelSoLuongTon, excelGia, excelMoTa, excelImage
+                        excelId, excelChatLieu, excelDongSp, excelSize, excelNSx, excelMau, excelSanPham, excelSoLuongTon, excelGia, excelMoTa
                     });
 
                 }
@@ -859,7 +922,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
             chiTietSp.setGia(Integer.parseInt(txtGia.getText()));
             chiTietSp.setMoTa(txtMoTa.getText());
 
-            
             if (txtGia.getText().isEmpty() || txtMoTa.getText().isEmpty() || txtSoLuongTon.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "moi dien du thuoc tinh");
                 return;
@@ -890,18 +952,6 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (txtTimKiem.getText().isEmpty()) {
-            loadTable(chiTietSpServiceImpl.getAll());
-        } else {
-
-            String id = txtTimKiem.getText();
-            ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
-            loadTable(lisy);
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
         // TODO add your handling code here:
 
@@ -909,10 +959,16 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
         // TODO add your handling code here:
-        String id = txtTimKiem.getText();
-        ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
+        if (txtTimKiem.getText().length() == 0) {
+            loadTable(chiTietSpServiceImpl.getAll());
+            return;
+        } else {
 
-        loadTable(lisy);
+            String id = txtTimKiem.getText();
+            ArrayList<ChiTietSp> lisy = chiTietSpRepository.getAll1(id);
+            loadTable(lisy);
+        }
+
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1007,11 +1063,59 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
         loadTable(chiTietSpServiceImpl.getAll());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        txtGia.setText("");
+        txtMoTa.setText("");
+        txtSoLuongTon.setText("");
+        txtMaSp.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btntienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntienActionPerformed
+        // TODO add your handling code here:
+
+        int index = tblChiTietSp.getSelectedRow();
+        index = 0;
+        tblChiTietSp.setRowSelectionInterval(index, index);
+        showdata(index);
+
+    }//GEN-LAST:event_btntienActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        int index = tblChiTietSp.getSelectedRow();
+        if (index > 0) {
+            index--;
+        }
+        tblChiTietSp.setRowSelectionInterval(index, index);
+        showdata(index);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        int index = tblChiTietSp.getSelectedRow();
+        if (index < list.size() - 1) {
+            index++;
+        }
+        tblChiTietSp.setRowSelectionInterval(index, index);
+        showdata(index);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        int index = tblChiTietSp.getSelectedRow();
+        index = list.size() - 1;
+        tblChiTietSp.setRowSelectionInterval(index, index);
+        showdata(index);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhapExcel;
     private javax.swing.JButton btnSUa;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXuat;
+    private javax.swing.JButton btntien;
     private javax.swing.JComboBox<String> cboChatLieu;
     private javax.swing.JComboBox<String> cboDongSp;
     private javax.swing.JComboBox<String> cboMauSac;
@@ -1019,10 +1123,12 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
     private javax.swing.JComboBox<String> cboSanPham;
     private javax.swing.JComboBox<String> cboSize;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

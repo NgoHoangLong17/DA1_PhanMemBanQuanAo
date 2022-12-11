@@ -59,5 +59,5 @@ public class ViewNhanVienServiceImpl implements ViewNhanVienService{
     public NhanVien getOne(Integer id) {
         return nhanVienRepository.getOne(id);
     }
-    
+
 }

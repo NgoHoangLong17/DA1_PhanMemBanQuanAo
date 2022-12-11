@@ -87,7 +87,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             defaultComboBoxModel.addElement(chucVu.getTenChucVu());
         }
     }
-
+    
     private void sendMail() {
 //        final String username = "tranviethung271003@gmail.com";
 //        final String password = "ibxcgycsagvxcabs";
@@ -116,7 +116,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                     InternetAddress.parse(txtEmail.getText())
             );
             message.setSubject("Mat khau dang nhap");
-            message.setText("Mat khau cua ban la: 1\n Luu y: Ban can doi mat khau de co the su dung he thong hoan thien");
+            message.setText("Mat khau cua ban la: 1\n Luu y: Ban can doi mat khau som de dam bao an toan cho tai khoan !");
             Transport.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -185,7 +185,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             String checkCmt = "\\d{9}";
             String checkCC = "\\d{12}";
             if (!txtCccd.getText().matches(checkCC) && !txtCccd.getText().matches(checkCmt)) {
-                sb.append("Mã cccd sai định dạng").append("\n");
+                sb.append("Mã cccd sai hoặc không đúng định dạng").append("\n");
             } else {
                 for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
                     if (nhanVien.getCccd().equals(txtCccd.getText())) {
@@ -570,8 +570,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                                                 .addGap(58, 58, 58)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                     .addComponent(jLabel9)
-                                                    .addComponent(txtCccd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(116, 116, 116))
+                                                    .addComponent(txtCccd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addGap(114, 114, 114)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

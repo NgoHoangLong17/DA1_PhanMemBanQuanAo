@@ -473,9 +473,7 @@
                                   <Component id="btnThanhToan" min="-2" pref="99" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnHoaDonTreo" min="-2" pref="109" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -538,7 +536,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnThanhToan" alignment="3" max="32767" attributes="0"/>
                               <Component id="btnHoaDonTreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -706,14 +703,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#x1ebb;"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jButton6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Load"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

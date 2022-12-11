@@ -422,6 +422,13 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             loadDataHoaDon(hoaDonService.getHdWhere(1, UserLogin.getNhanVien().getId()));
             rdoDaThanhToan.setSelected(true);
+//            for (HoaDonChiTiet hdct : hoaDonChiTietService.getAll()) {
+//                if(hdct.getHoaDon().getId()==hd.getId()){
+//                    ChiTietSp ctsp = chiTietSPService.getOne(hdct.getChiTietSp().getId());
+//                    ctsp.setSoLuongTon(ctsp.getSoLuongTon()-hdct.getSoLuong());
+//                    chiTietSPService.update(ctsp);
+//                }
+//            }
         }
     }
 
@@ -494,7 +501,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         lblMaKH = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 0));
 
@@ -789,13 +795,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
         lblMaKH.setText("Lẻ");
 
-        jButton6.setText("Load");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -840,9 +839,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnHoaDonTreo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                        .addGap(0, 97, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -891,8 +888,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHoaDonTreo)
-                    .addComponent(jButton6))
+                    .addComponent(btnHoaDonTreo))
                 .addContainerGap())
         );
 
@@ -978,6 +974,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         newForm();
         ChonKhachHang.setKhachHang(khachHangService.getOne(1));
         new KhachHangJpanel().updateRankAll();
+        
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -1121,12 +1118,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        lblTenKH.setText(ChonKhachHang.getKhachHang().getTen());
-        lblMaKH.setText(ChonKhachHang.getKhachHang().getMa());
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         new KhuyenMaiJframe().setVisible(true);
@@ -1141,7 +1132,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

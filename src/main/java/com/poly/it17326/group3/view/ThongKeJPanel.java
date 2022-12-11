@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.poly.it17326.group3.view;
+
 import com.poly.it17326.group3.domainmodels.ChiTietSp;
 import com.poly.it17326.group3.domainmodels.HoaDon;
 import com.poly.it17326.group3.repository.ChiTietSpRepository;
@@ -10,7 +11,7 @@ import com.poly.it17326.group3.service.ViewHoaDonService;
 import com.poly.it17326.group3.service.impl.ChiTietSpServiceImpl;
 import com.poly.it17326.group3.service.impl.HoaDonServiceImpl;
 import jakarta.mail.Authenticator;
-import jakarta.mail.Message;    
+import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
@@ -35,16 +36,18 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author ADMIN
  */
 public class ThongKeJPanel extends javax.swing.JPanel {
-    
+
     private ChiTietSpRepository chiTietSpRepository = new ChiTietSpRepository();
     private ChiTietSpServiceImpl chiTietSpServiceImpl = new ChiTietSpServiceImpl();
     private DefaultTableModel model;
     private ViewHoaDonService hoaDonService;
+
     /**
      * Creates new form ThongKeJPanel
      */
@@ -56,7 +59,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         txtThanhCong.setText(getTongDonHangThanhCong() + "");
         txtDonHuy.setText(getTongDonHangBiHuy() + "");
     }
-    
+
     public void loadTable(ArrayList<ChiTietSp> list) {
         model = (DefaultTableModel) tblThongKeSp.getModel();
         model.setRowCount(0);
@@ -68,7 +71,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
 
             Object[] row = new Object[]{
                 i++,
-                chiTietSanPham.getId(),
+                chiTietSanPham.getMactsp(),
                 chiTietSanPham.getSanPham().getTen(), chiTietSanPham.getDongSp().getTen(),
                 chiTietSanPham.getGia(),
                 chiTietSanPham.getMauSac().getTen(), chiTietSanPham.getChatLieu().getTen(),
@@ -77,7 +80,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
-    
+
     private int getTongDonHang() {
         int i = 0;
         for (HoaDon hoaDon : hoaDonService.getAll()) {
@@ -109,6 +112,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         }
         return i;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,7 +236,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtDtNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDtNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -259,8 +263,8 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txtDtThang, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(txtDtThang, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,8 +290,8 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(txtNam, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,11 +366,11 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,11 +397,11 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         pan2.setLayout(pan2Layout);
         pan2Layout.setHorizontalGroup(
             pan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 982, Short.MAX_VALUE)
+            .addGap(0, 848, Short.MAX_VALUE)
         );
         pan2Layout.setVerticalGroup(
             pan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
 
         buttonGroup1.add(rdoThang);
@@ -433,7 +437,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -443,26 +447,25 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnGuiBaoCao)))
-                .addGap(18, 18, 18)
-                .addComponent(pan2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(rdoThang)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(rdoThang)
                         .addGap(31, 31, 31)
                         .addComponent(rdoNam)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
-                        .addComponent(btnGuiBaoCao)
-                        .addGap(25, 25, 25))
+                        .addGap(61, 61, 61)
+                        .addComponent(btnGuiBaoCao))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(pan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addComponent(pan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doanh thu", jPanel10);
@@ -494,6 +497,11 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimActionPerformed(evt);
+            }
+        });
         txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTimKeyReleased(evt);
@@ -513,26 +521,28 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBanChay)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addComponent(jButton4)
-                .addGap(87, 87, 87))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBanChay)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)))
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
@@ -551,7 +561,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1105, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,10 +575,12 @@ public class ThongKeJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,8 +588,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -611,76 +622,125 @@ public class ThongKeJPanel extends javax.swing.JPanel {
     private void rdoThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoThangMouseClicked
         // TODO add your handling code here:
 
-                List<Long> a1 = chiTietSpRepository.ThongKeThang1(1, 2022);
-                double val1 = 0;
-                for (Long double1 : a1) {
-                        val1 = double1;
-                    }
+        List<Long> a1 = chiTietSpRepository.ThongKeThang1(1, 2022);
+        double val1 = 0;
+        for (Long double1 : a1) {
+            if (double1 == null) {
+                val1 = 0;
+            } else {
+                val1 = double1;
+            }
+        }
         //2
-                List<Long> a2 = chiTietSpRepository.ThongKeThang2(2, 2022);
-                double val2 = 0;
-                for (Long double1 : a2) {
-                        val2 = double1;
-                    }
-                //3
-                List<Long> a3 = chiTietSpRepository.ThongKeThang3(3, 2022);
-                double val3 = 0;
-                for (Long double1 : a3) {
-                        val3 = double1;
-                    }
-                //4
-                List<Long> a4 = chiTietSpRepository.ThongKeThang4(4, 2022);
-                double val4 = 0;
-                for (Long double1 : a4) {
-                        val4 = double1;
-                    }
+        List<Long> a2 = chiTietSpRepository.ThongKeThang2(2, 2022);
+        double val2 = 0;
+        for (Long double1 : a2) {
+            if (double1 == null) {
+                val2 = 0;
+            } else {
+                val2 = double1;
+            }
+            
+        }
+        //3
+        List<Long> a3 = chiTietSpRepository.ThongKeThang3(3, 2022);
+        double val3 = 0;
+        for (Long double1 : a3) {
+            if (double1 == null) {
+                val3 = 0;
+            } else {
+                val3 = double1;
+            }
+        }
+        //4
+        List<Long> a4 = chiTietSpRepository.ThongKeThang4(4, 2022);
+        double val4 = 0;
+        for (Long double1 : a4) {
+            if (double1 == null) {
+                val4 = 0;
+            } else {
+                val4 = double1;
+            }
+        }
         //5
         List<Long> a5 = chiTietSpRepository.ThongKeThang5(5, 2022);
         double val5 = 0;
         for (Long double1 : a5) {
-            val5 = double1;
+            if (double1 == null) {
+                val5 = 0;
+            } else {
+                val5 = double1;
+            }
         }
         //6
-                List<Long> a6 = chiTietSpRepository.ThongKeThang6(6, 2022);
-                double val6 = 0;
-                for (Long double1 : a6) {
-                        val6 = double1;
-                    }
-                //7
-                List<Long> a7 = chiTietSpRepository.ThongKeThang7(7, 2022);
-                double val7 = 0;
-                for (Long double1 : a7) {
-                        val7 = double1;
-                    }
-                //8
-                List<Long> a8 = chiTietSpRepository.ThongKeThang8(8, 2022);
-                double val8 = 0;
-                for (Long double1 : a8) {
-                        val8 = double1;
-                    }
-                //9
-                List<Long> a9 = chiTietSpRepository.ThongKeThang9(9, 2022);
-                double val9 = 0;
-                for (Long double1 : a9) {
-                        val9 = double1;
-                    }
-                //10
-                List<Long> a10 = chiTietSpRepository.ThongKeThang10(10, 2022);
-                double val10 = 0;
-                for (Long double1 : a10) {
-                        val10 = double1;
-                    }//11
-                List<Long> a11 = chiTietSpRepository.ThongKeThang11(11, 2022);
-                double val11 = 0;
-                for (Long double1 : a11) {
-                        val11 = double1;
-                    }
-                //12
-                List<Long> a12 = chiTietSpRepository.ThongKeThang12(12, 2022);
-                double val12 = 0;
-                for (Long double1 : a12) {
-                        val12 = double1;
-                    }
+        List<Long> a6 = chiTietSpRepository.ThongKeThang6(6, 2022);
+        double val6 = 0;
+        for (Long double1 : a6) {
+            if (double1 == null) {
+                val6 = 0;
+            } else {
+                val6 = double1;
+            }
+        }
+        //7
+        List<Long> a7 = chiTietSpRepository.ThongKeThang7(7, 2022);
+        double val7 = 0;
+        for (Long double1 : a7) {
+            if (double1 == null) {
+                val7 = 0;
+            } else {
+                val7 = double1;
+            }
+        }
+        //8
+        List<Long> a8 = chiTietSpRepository.ThongKeThang8(8, 2022);
+        double val8 = 0;
+        for (Long double1 : a8) {
+            if (double1 == null) {
+                val8 = 0;
+            } else {
+                val8 = double1;
+            }
+        }
+        //9
+        List<Long> a9 = chiTietSpRepository.ThongKeThang9(9, 2022);
+        double val9 = 0;
+        for (Long double1 : a9) {
+            if (double1 == null) {
+                val9 = 0;
+            } else {
+                val9 = double1;
+            }
+        }
+        //10
+        List<Long> a10 = chiTietSpRepository.ThongKeThang10(10, 2022);
+        double val10 = 0;
+        for (Long double1 : a10) {
+            if (double1 == null) {
+                val10 = 0;
+            } else {
+                val10 = double1;
+            }
+        }//11
+        List<Long> a11 = chiTietSpRepository.ThongKeThang11(11, 2022);
+        double val11 = 0;
+        for (Long double1 : a11) {
+            if (double1 == null) {
+                val11 = 0;
+            } else {
+                val11 = double1;
+            }
+        }
+        //12
+        List<Long> a12 = chiTietSpRepository.ThongKeThang12(12, 2022);
+        double val12 = 0;
+        for (Long double1 : a12) {
+            if (double1 == null) {
+                val12 = 0;
+            } else {
+                val12 = double1;
+            }
+        }
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -696,7 +756,6 @@ public class ThongKeJPanel extends javax.swing.JPanel {
 //        int val10 = 35000;
 //        int val11= 25;
 //        int val12 = 30;
-
         dataset.setValue(val1, "", " 1");
         dataset.setValue(val2, "", " 2");
         dataset.setValue(val3, "", " 3");
@@ -770,7 +829,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         //int val3 = 15;
         //int val4 = 20;
     }//GEN-LAST:event_rdoNamMouseClicked
-    
+
     private void sendMail() {
 //        final String username = "tranviethung271003@gmail.com";
 //        final String password = "ibxcgycsagvxcabs";
@@ -811,7 +870,7 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Gửi mail thành công");
 
     }
-    
+
     private void btnGuiBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiBaoCaoActionPerformed
         // TODO add your handling code here:
         sendMail();
@@ -875,6 +934,10 @@ public class ThongKeJPanel extends javax.swing.JPanel {
         //        ArrayList<KhuyenMai> listTK = (ArrayList<KhuyenMai>) khuyenMaiService.tim(ten);
         //        loadData(listTK);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

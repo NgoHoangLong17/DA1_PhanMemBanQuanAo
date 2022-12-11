@@ -142,7 +142,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             }
         });
 
-        txtMatKhau.setText("jPasswordField1");
+        txtMatKhau.setText("123sdsafghfdfghj");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

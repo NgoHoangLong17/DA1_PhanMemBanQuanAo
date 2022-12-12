@@ -87,7 +87,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             defaultComboBoxModel.addElement(chucVu.getTenChucVu());
         }
     }
-    
+
     private void sendMail() {
 //        final String username = "tranviethung271003@gmail.com";
 //        final String password = "ibxcgycsagvxcabs";
@@ -194,9 +194,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 }
             }
         }
-//        if (!txtNgaySinh.getJCalendar().isEnabled()) {
-//            sb.append("Chưa nhập ngày sinh").append("\n");
-//        }
+        try {
+            Date ngaySinh = this.txtNgaySinh.getDate();
+            if (ngaySinh == null) {
+                sb.append("Chưa nhập ngày sinh ").append("\n");
+            }
+        } catch (Exception e) {
+        }
         if (txtSDT.getText().isEmpty()) {
             sb.append("Chưa nhập số điện thoại").append("\n");
         } else {
@@ -209,6 +213,41 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         sb.append("SĐT sai định dạng").append("\n");
                     }
                 }
+            }
+        }
+        if (txtDiaChi.getText().isEmpty()) {
+            sb.append("Chưa nhập địa chỉ").append("\n");
+        }
+        return sb;
+    }
+
+    private StringBuilder validatorSua() {
+        sb = new StringBuilder();
+        if (txtTenNhanVien.getText().isEmpty()) {
+            sb.append("Chưa nhập họ tên").append("\n");
+        }
+        if (txtEmail.getText().isEmpty()) {
+            sb.append("Chưa nhập Email").append("\n");
+        } else {
+            String checkEmail = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+            if (!txtEmail.getText().matches(checkEmail)) {
+                sb.append("Email sai định dạng").append("\n");
+            }
+
+        }
+        try {
+            Date ngaySinh = this.txtNgaySinh.getDate();
+            if (ngaySinh == null) {
+                sb.append("Chưa nhập ngày sinh ").append("\n");
+            }
+        } catch (Exception e) {
+        }
+        if (txtSDT.getText().isEmpty()) {
+            sb.append("Chưa nhập số điện thoại").append("\n");
+        } else {
+            String checkSDT = "0\\d{9,10}";
+            if (!txtSDT.getText().matches(checkSDT)) {
+                sb.append("SĐT sai định dạng").append("\n");
             }
         }
         if (txtDiaChi.getText().isEmpty()) {
@@ -640,6 +679,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 //        txtSTT.setText(null);
         txtMaNV.setText(null);
         txtCccd.setText(null);
+        txtNgaySinh.setCalendar(null);
         txtTenNhanVien.setText(null);
         cboChucVu.setSelectedItem(0);
         txtDiaChi.setText(null);
@@ -649,6 +689,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         rbnNu.setSelected(false);
         chekNghi.setSelected(false);
         chekNghi.setEnabled(false);
+        txtCccd.setEnabled(true);
 //        txtMatKhau.setText(null);
     }//GEN-LAST:event_btnNewActionPerformed
 
@@ -679,6 +720,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         } else {
             chekNghi.setSelected(false);
         }
+        txtCccd.setEnabled(false);
         chekNghi.setEnabled(true);
     }//GEN-LAST:event_tbNhanVienMouseClicked
 
@@ -765,10 +807,14 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         int index = tbNhanVien.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Chưa chọn dòng");
+        }
+        if (validatorSua().length() > 0) {
+            JOptionPane.showMessageDialog(this, sb.toString());
+            return;
         } else {
             NhanVien nhanVien = viewNhanVienService.getNhanVien().get(index);
             nhanVien.setMaNV(txtMaNV.getText());
-            nhanVien.setCccd(txtCccd.getText());
+//            nhanVien.setCccd(txtCccd.getText());
             nhanVien.setTenNhanVien(txtTenNhanVien.getText());
             ChucVu chucVu = viewChucVuService.getChucVu().get(cboChucVu.getSelectedIndex());
             nhanVien.setChucVu(chucVu);

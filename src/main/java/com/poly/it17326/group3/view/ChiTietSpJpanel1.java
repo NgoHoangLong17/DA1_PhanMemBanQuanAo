@@ -390,16 +390,7 @@ public class ChiTietSpJpanel1 extends javax.swing.JPanel {
         buttonGroup.add(rdoDongSp);
     }
 
-    public Boolean checkSua() {
-        String id = txtMaSP.getText();
-        ChiTietSp chiTietSpCheckSua = chiTietSpServiceImpl.getOne(id);
-        for (ChiTietSp chiTietSp : list) {
-            if (chiTietSpCheckSua == chiTietSp) {
-                continue;
-            }
-            chiTietSpRepository.getCheckTrung(WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH);
-        }
-    }
+ 
 
     public ChiTietSpJpanel1() {
         initComponents();
@@ -512,6 +503,12 @@ public class ChiTietSpJpanel1 extends javax.swing.JPanel {
         jLabel6.setText("Mau Sac");
 
         jLabel7.setText("Chat Lieu");
+
+        txtMoTa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMoTaKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("Mo ta");
 
@@ -1477,17 +1474,20 @@ public class ChiTietSpJpanel1 extends javax.swing.JPanel {
             chiTietSp.setMoTa(txtMoTa.getText());
 
             Boolean check = false;
-            if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
+            
                 for (ChiTietSp chiTietSp1 : list) {
                     if (chiTietSp1.getId() == chiTietSp.getId()) {
                         check = true;
                     }
                 }
                 if (check == false) {
-                    JOptionPane.showMessageDialog(this, "Trung thuoc tinh");
-                    return;
+                    if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
+                        JOptionPane.showMessageDialog(this, "Trung thuoc tinh");
+                        return;
+                    }
+                    
                 }
-            }
+            
 
             if (chiTietSpServiceImpl.update(chiTietSp) == true) {
                 JOptionPane.showMessageDialog(this, "sua thanh cong");
@@ -1664,6 +1664,16 @@ public class ChiTietSpJpanel1 extends javax.swing.JPanel {
 
     }
 
+    
+//    private void timKiem(){
+//        ArrayList<ChiTietSp> lst = new ArrayList<>();
+//        for (ChiTietSp ctsp : chiTietSpRepository.getAll()) {
+//            if(ctsp.getSanPham().getTen().contains(cbo){
+//                lst.add(ctsp);
+//            }
+//        }
+//        loadTableCtSanPham(lst);
+//    }
     private void lblThongTinChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongTinChiTietMouseClicked
         // TODO add your handling code here:
 
@@ -1728,6 +1738,11 @@ public class ChiTietSpJpanel1 extends javax.swing.JPanel {
     private void lblThongTinChiTietMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongTinChiTietMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_lblThongTinChiTietMouseEntered
+
+    private void txtMoTaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoTaKeyReleased
+        // TODO add your handling code here:
+        // timKiem();
+    }//GEN-LAST:event_txtMoTaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

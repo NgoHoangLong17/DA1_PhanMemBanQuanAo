@@ -291,13 +291,13 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(btnThem)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(btnSua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(btnXoa)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHuy)
                 .addGap(23, 23, 23))
         );
@@ -418,24 +418,37 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
         if (txtTen.getText().isEmpty()) {
             sb.append("Tên không đc để trống\n");
         }
+        if(!rdoDaHetHan.isSelected() && !rdoDangHD.isSelected()){
+            sb.append("Chưa chọn trạng thái\n");
+        }
         if (txtMucgiam.getText().isEmpty()) {
             sb.append("Mức giảm không đc để trống\n");
         } else {
             try {
                 int mucGiam = Integer.parseInt(txtMucgiam.getText());
-                if (mucGiam < 0) {
-                    sb.append("Mức giảm lớn hơn 0\n");
+                if (mucGiam < 1 || mucGiam >100) {
+                    sb.append("Mức giảm lớn hơn 0 và nhỏ hơn 100\n");
                 }
             } catch (Exception e) {
                 sb.append("Mức giảm phải là số\n");
             }
         }
-        if(txtNgayBatDau.getJCalendar().isEnabled()){
-            sb.append("Phải chọn ngày bắt đầu\n");
+        try {
+            Date ngayBD = this.txtNgayBatDau.getDate();
+            Date ngayKT = this.txtNgayKetThuc.getDate();
+            if(ngayBD == null){
+                sb.append("Không đc để trống ngày bắt đầu\n");
+            }
+            if(ngayKT == null){
+                sb.append("Không được để trống ngày kết thúc");
+            }
+            if(ngayBD.getTime() >= ngayKT.getTime()){
+                sb.append("Ngày kết thúc không hợp lệ\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if(txtNgayKetThuc.getJCalendar().isEnabled()){
-            sb.append("Phải chọn ngày kết thúc\n");
-        }
+
         if (sb.length() > 0) {
             JOptionPane.showMessageDialog(this, sb.toString());
             return;
@@ -481,18 +494,27 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
         }else{
             try {
                 int mucGiam = Integer.parseInt(txtMucgiam.getText());
-                if(mucGiam<0){
-                    sb.append("Mức giảm lớn hơn 0\n");
+                if(mucGiam<1 || mucGiam > 100){
+                    sb.append("Mức giảm lớn hơn 0 và nhỏ hơn 100\n");
                 }
             } catch (Exception e) {
                 sb.append("Mức giảm phải là số\n");
             }
         }
-        if(!txtNgayBatDau.getJCalendar().isEnabled()){
-            sb.append("Phải chọn ngày bắt đầu\n");
-        }
-        if(!txtNgayKetThuc.getJCalendar().isEnabled()){
-            sb.append("Phải chọn ngày kết thúc\n");
+        try {
+            Date ngayBD = this.txtNgayBatDau.getDate();
+            Date ngayKT = this.txtNgayKetThuc.getDate();
+            if(ngayBD == null){
+                sb.append("Không đc để trống ngày bắt đầu\n");
+            }
+            if(ngayKT == null){
+                sb.append("Không được để trống ngày kết thúc");
+            }
+            if(ngayBD.getTime() >= ngayKT.getTime()){
+                sb.append("Ngày kết thúc không hợp lê\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         if(sb.length()>0){
             JOptionPane.showMessageDialog(this, sb.toString());
@@ -551,7 +573,25 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        
+        int index = tblKhuyenMai.getSelectedRow();
+        if(index == -1){
+            JOptionPane.showMessageDialog(this, "Bạn chọn 1 chương trình khuyến mại");
+            return;
+        }
+//        Date date = new Date();
+//        String maKhuyenMai = String.valueOf(tblKhuyenMai.getValueAt(index, 0));
+//        KhuyenMai khuyenMai = khuyenMaiRepository.getOne(maKhuyenMai);
+//        khuyenMai.setTrangThai(5);
+//        khuyenMai.setNgayKetThuc(date);
+//        this.khuyenMaiService.update(khuyenMai);
+//        JOptionPane.showMessageDialog(this, "Đã hủy chương trình");
+//        loadData(khuyenMaiService.getAll());
+        KhuyenMai khuyenMai = khuyenMaiService.getAll().get(index);  
+        khuyenMai.setTrangThai(5);
+        khuyenMaiService.update(khuyenMai);
+        JOptionPane.showMessageDialog(this, "Đã hủy chương trình");
+        loadData(khuyenMaiService.getAll());
+        checkKhuyenMai();
     }//GEN-LAST:event_btnHuyActionPerformed
 
 

@@ -77,6 +77,7 @@
 package com.poly.it17326.group3.repository;
 
 import com.poly.it17326.group3.config.HibernateConfig;
+import com.poly.it17326.group3.domainmodels.DongSp;
 import com.poly.it17326.group3.domainmodels.KhuyenMai;
 import java.util.List;
 import org.hibernate.Session;
@@ -88,7 +89,10 @@ import org.hibernate.query.Query;
  * @author longnh203
  */
 public class KhuyenMaiRepository {
-
+    private Session session = HibernateConfig.getFACTORY().openSession();
+    
+    private String fromTable = "FROM KhuyenMai";
+    
     public List<KhuyenMai> getAll() {
         Session ses = HibernateConfig.getFACTORY().openSession();
         String HQL = "from KhuyenMai";
@@ -207,7 +211,8 @@ public class KhuyenMaiRepository {
         }
     }
 
-     public List<KhuyenMai> tim(String Ten) {
+     
+    public List<KhuyenMai> tim(String Ten) {
 
         try (Session session = HibernateConfig.getFACTORY().openSession();) {
             String sql = "from KhuyenMai where Ten = :Ten";
@@ -220,6 +225,13 @@ public class KhuyenMaiRepository {
 
     }
 
+     public KhuyenMai getOne(String ma) {
+        String sql = fromTable + " where MAKHUYENMAI =: ma";
+        Query query = session.createQuery(sql, KhuyenMai.class);
+        query.setParameter("ma", ma);
+        return (KhuyenMai) query.getSingleResult();
+    }
+     
 
 }
 //>>>>>>> origin/Dev

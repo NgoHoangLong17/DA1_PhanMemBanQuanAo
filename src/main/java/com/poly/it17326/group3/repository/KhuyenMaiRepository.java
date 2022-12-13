@@ -157,7 +157,7 @@ public class KhuyenMaiRepository {
     public void auto1() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
+            String sql = "update KhuyenMai set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -171,7 +171,7 @@ public class KhuyenMaiRepository {
     public void auto2() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
+            String sql = "update KhuyenMai set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -185,7 +185,7 @@ public class KhuyenMaiRepository {
     public void auto3() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=2 where GETDATE() <NGAYBATDAU\n"
+            String sql = "update KhuyenMai set TRANGTHAI=2 where GETDATE() <NGAYBATDAU and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -225,12 +225,14 @@ public class KhuyenMaiRepository {
 
     }
 
-     public KhuyenMai getOne(String ma) {
-        String sql = fromTable + " where MAKHUYENMAI =: ma";
+    public KhuyenMai getOne(int trangThai) {
+        String sql = fromTable + " where trangThai =: trangThai";
         Query query = session.createQuery(sql, KhuyenMai.class);
-        query.setParameter("ma", ma);
+        query.setParameter("trangThai", trangThai);
         return (KhuyenMai) query.getSingleResult();
     }
+     
+     
      
 
 }

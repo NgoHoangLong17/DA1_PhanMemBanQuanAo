@@ -841,10 +841,7 @@ public class ChiTietSpJpanel extends javax.swing.JPanel implements Runnable, Thr
                 JOptionPane.showMessageDialog(this, "moi dien du thuoc tinh");
                 return;
             }
-            if (chiTietSpRepository.getCheckTrung(sanPham.getId(), sp.getId(), ms.getId(), chatLieu.getId(), size.getId(), nsx.getId()).size() > 0) {
-                JOptionPane.showMessageDialog(this, "that bai");
-                return;
-            }
+          
             if (chiTietSpServiceImpl.update(chiTietSp) == true) {
                 JOptionPane.showMessageDialog(this, "thanh cong");
                 loadTable(chiTietSpRepository.getAll());

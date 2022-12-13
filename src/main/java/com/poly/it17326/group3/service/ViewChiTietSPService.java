@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group3.service;
 
-
 import com.poly.it17326.group3.domainmodels.ChatLieu;
 import com.poly.it17326.group3.domainmodels.ChiTietSp;
 import com.poly.it17326.group3.domainmodels.DongSp;
@@ -22,8 +21,6 @@ import java.util.List;
 public interface ViewChiTietSPService {
 
     public ArrayList<ChiTietSp> getAll();
-
-
 
     public List<SanPham> getSanPham();
 
@@ -43,5 +40,17 @@ public interface ViewChiTietSPService {
 
     public Boolean delete(ChiTietSp chiTietSp);
 
-    public ChiTietSp getOne(int id);
+    public ChiTietSp getOne(String id);
+
+    public ArrayList<ChiTietSp> getTimSp(int idsp);
+
+    public ArrayList<ChiTietSp> getTimDong(int iddongsp);
+
+    public ArrayList<ChiTietSp> getTimNsx(int idnsx);
+
+    public ArrayList<ChiTietSp> getTimMau(int idmausac);
+
+    public ArrayList<ChiTietSp> getTimChatLieu(int idchatlieu);
+
+    public ArrayList<ChiTietSp> getTimSize(int idsize);
 }

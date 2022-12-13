@@ -41,6 +41,45 @@ public class ChiTietSpRepository {
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
 
+    public ArrayList<ChiTietSp> getTimSp(int idsp) {
+        Query query = session.createQuery(fromTable + "  where IDSP = :idsp ");
+        query.setParameter("idsp", idsp);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+
+    public ArrayList<ChiTietSp> getTimDong(int iddongsp) {
+        Query query = session.createQuery(fromTable + "  where IDDONGSP = :iddongsp ");
+        query.setParameter("iddongsp", iddongsp);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+
+    public ArrayList<ChiTietSp> getTimNsx(int idnsx) {
+        Query query = session.createQuery(fromTable + "  where IDNSX = :idnsx ");
+        query.setParameter("idnsx", idnsx);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+
+    public ArrayList<ChiTietSp> getTimMau(int idmausac) {
+        Query query = session.createQuery(fromTable + "  where IDMAUSAC = :idmausac ");
+        query.setParameter("idmausac", idmausac);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+
+    public ArrayList<ChiTietSp> getTimChatLieu(int idchatlieu) {
+        Query query = session.createQuery(fromTable + "  where IDCHATLIEU = :idchatlieu ");
+        query.setParameter("idchatlieu", idchatlieu);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+    
+     public ArrayList<ChiTietSp> getTimSize(int idsize) {
+        Query query = session.createQuery(fromTable + " where IDSIZE = :idsize ");
+        query.setParameter("idsize", idsize);
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
+     
+
+    
+
     public ArrayList<ChiTietSp> getCheckTrung(int idsp, int iddongsp, int idmausac, int idchatlieu, int idsize, int idnsx) {
         Query query = session.createQuery(fromTable + "  where IDSP = :idsp and IDDONGSP =:iddongsp and "
                 + "IDMAUSAC =:idmausac and IDCHATLIEU =:idchatlieu and IDSIZE=:idsize and IDNSX =:idnsx");
@@ -52,6 +91,8 @@ public class ChiTietSpRepository {
         query.setParameter("idnsx", idnsx);
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
+    
+    
 
     public ArrayList<ChiTietSp> getCheckTonTai(int idsp) {
         Query query = session.createQuery(fromTable + "  INNER JOIN  SanPham on ChiTietSp.id = SanPham.ID \n"
@@ -134,7 +175,7 @@ public class ChiTietSpRepository {
         return null;
     }
 
-    public ChiTietSp getOne(int id) {
+    public ChiTietSp getOne(String id) {
         String sql = fromTable + " where MACTSP=:id";
         Query query = session.createQuery(sql, ChiTietSp.class);
         query.setParameter("id", id);
@@ -147,6 +188,8 @@ public class ChiTietSpRepository {
         query.setParameter("id", id);
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
+    
+     
 
     public static void main(String[] args) {
         List<ChiTietSp> list = new ChiTietSpRepository().getCheckTonTai(1);

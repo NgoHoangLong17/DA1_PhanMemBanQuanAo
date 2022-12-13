@@ -154,14 +154,21 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
     private StringBuilder validator() {
         sb = new StringBuilder();
-//        if(txtMaNV.getText().isEmpty()){
-//            sb.append("Chưa nhập mã nhân viên").append("\n");
-//        }else{
-//            for(NhanVien nhanVien : viewNhanVienService.getNhanVien()){
-//                if(nhanVien.getMaNV().equals(txtMaNV.getText())){
-//                    sb.append("Mã nhân viên đã tồn tại").append("\n");
-//                }
-//            }
+        if (txtCccd.getText().isEmpty()) {
+            sb.append("Chưa nhập cccd").append("\n");
+        } else {
+            String checkCmt = "\\d{9}";
+            String checkCC = "\\d{12}";
+            if (!txtCccd.getText().matches(checkCC) && !txtCccd.getText().matches(checkCmt)) {
+                sb.append("Mã cccd sai hoặc không đúng định dạng").append("\n");
+            } else {
+                for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
+                    if (nhanVien.getCccd().equals(txtCccd.getText())) {
+                        sb.append("Mã cccd đã được sử dụng").append("\n");
+                    }
+                }
+            }
+        }
         if (txtTenNhanVien.getText().isEmpty()) {
             sb.append("Chưa nhập họ tên").append("\n");
         }
@@ -179,21 +186,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 }
             }
         }
-        if (txtCccd.getText().isEmpty()) {
-            sb.append("Chưa nhập cccd").append("\n");
-        } else {
-            String checkCmt = "\\d{9}";
-            String checkCC = "\\d{12}";
-            if (!txtCccd.getText().matches(checkCC) && !txtCccd.getText().matches(checkCmt)) {
-                sb.append("Mã cccd sai hoặc không đúng định dạng").append("\n");
-            } else {
-                for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
-                    if (nhanVien.getCccd().equals(txtCccd.getText())) {
-                        sb.append("Mã cccd đã được sử dụng").append("\n");
-                    }
-                }
-            }
-        }
+
         try {
             Date ngaySinh = this.txtNgaySinh.getDate();
             if (ngaySinh == null) {
@@ -278,7 +271,6 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         btntien = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
-        btnTim = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -389,10 +381,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("Tìm Kiếm :");
 
-        btnTim.setText("Tìm");
-        btnTim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimActionPerformed(evt);
+        txtTim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKeyReleased(evt);
             }
         });
 
@@ -408,14 +399,12 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
                         .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnDau, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(btnLui, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 746, Short.MAX_VALUE)
                         .addComponent(btntien, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(btnCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -427,8 +416,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -882,10 +870,16 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         loadTextFile(row);
     }//GEN-LAST:event_btnLuiActionPerformed
 
-    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+    private void txtTimKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKeyReleased
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnTimActionPerformed
+        ArrayList<NhanVien> lst = new ArrayList<>();
+        for (NhanVien nv : viewNhanVienService.getNhanVien()) {
+            if (nv.getTenNhanVien().contains(txtTim.getText()) || nv.getMaNV().contains(txtTim.getText()) || nv.getCccd().contains(txtTim.getText())) {
+                lst.add(nv);
+            }
+        }
+        LoadTable(lst);
+    }//GEN-LAST:event_txtTimKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCuoi;
@@ -894,7 +888,6 @@ public class NhanVienJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXuatFile;
     private javax.swing.JButton btntien;
     private javax.swing.ButtonGroup buttonGroup1;

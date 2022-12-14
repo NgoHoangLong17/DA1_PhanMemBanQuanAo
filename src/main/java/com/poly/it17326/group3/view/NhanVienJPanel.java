@@ -202,7 +202,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             System.out.println(namSinh);
             if (year - namSinh < 15) {
                 sb.append("Nhân viên không trong độ tuổi lao động").append("\n");
-            } 
+            }
         } catch (Exception e) {
         }
         if (txtSDT.getText().isEmpty()) {
@@ -211,13 +211,13 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
                 if (nhanVien.getSDT().equals(txtSDT.getText())) {
                     sb.append("SĐT đã được sử dụng").append("\n");
-                } else {
-                    String checkSDT = "0\\d{9,10}";
-                    if (!txtSDT.getText().matches(checkSDT)) {
-                        sb.append("SĐT sai định dạng").append("\n");
-                    }
                 }
             }
+        }
+        String checkSDT = "0\\d{9,10}";
+        String checkSDT2 = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        if (!txtSDT.getText().matches(checkSDT) || !txtSDT.getText().matches(checkSDT2)) {
+            sb.append("SĐT sai định dạng").append("\n");
         }
         if (txtDiaChi.getText().isEmpty()) {
             sb.append("Chưa nhập địa chỉ").append("\n");
@@ -249,10 +249,16 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         if (txtSDT.getText().isEmpty()) {
             sb.append("Chưa nhập số điện thoại").append("\n");
         } else {
-            String checkSDT = "0\\d{9,10}";
-            if (!txtSDT.getText().matches(checkSDT)) {
-                sb.append("SĐT sai định dạng").append("\n");
+            for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
+                if (nhanVien.getSDT().equals(txtSDT.getText())) {
+                    sb.append("SĐT đã được sử dụng").append("\n");
+                }
             }
+        }
+        String checkSDT = "0\\d{9,10}";
+        String checkSDT2 = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        if (!txtSDT.getText().matches(checkSDT) || !txtSDT.getText().matches(checkSDT2)) {
+            sb.append("SĐT sai định dạng").append("\n");
         }
         if (txtDiaChi.getText().isEmpty()) {
             sb.append("Chưa nhập địa chỉ").append("\n");

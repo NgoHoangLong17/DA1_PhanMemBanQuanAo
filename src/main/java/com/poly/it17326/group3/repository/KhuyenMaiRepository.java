@@ -77,6 +77,7 @@
 package com.poly.it17326.group3.repository;
 
 import com.poly.it17326.group3.config.HibernateConfig;
+import com.poly.it17326.group3.domainmodels.DongSp;
 import com.poly.it17326.group3.domainmodels.KhuyenMai;
 import java.util.List;
 import org.hibernate.Session;
@@ -88,7 +89,10 @@ import org.hibernate.query.Query;
  * @author longnh203
  */
 public class KhuyenMaiRepository {
-
+    private Session session = HibernateConfig.getFACTORY().openSession();
+    
+    private String fromTable = "FROM KhuyenMai";
+    
     public List<KhuyenMai> getAll() {
         Session ses = HibernateConfig.getFACTORY().openSession();
         String HQL = "from KhuyenMai";
@@ -153,7 +157,7 @@ public class KhuyenMaiRepository {
     public void auto1() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC \n"
+            String sql = "update KhuyenMai set TRANGTHAI=0 where GETDATE() between NGAYBATDAU and NGAYKETTHUC and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -167,7 +171,7 @@ public class KhuyenMaiRepository {
     public void auto2() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC \n"
+            String sql = "update KhuyenMai set TRANGTHAI=1 where GETDATE() >NGAYKETTHUC and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -181,7 +185,7 @@ public class KhuyenMaiRepository {
     public void auto3() {
         Transaction transaction = null;
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
-            String sql = "update KhuyenMai set TRANGTHAI=2 where GETDATE() <NGAYBATDAU\n"
+            String sql = "update KhuyenMai set TRANGTHAI=2 where GETDATE() <NGAYBATDAU and trangthai !=5\n"
                     ;
             transaction = session.beginTransaction();
             Query q = session.createQuery(sql);
@@ -207,7 +211,8 @@ public class KhuyenMaiRepository {
         }
     }
 
-     public List<KhuyenMai> tim(String Ten) {
+     
+    public List<KhuyenMai> tim(String Ten) {
 
         try (Session session = HibernateConfig.getFACTORY().openSession();) {
             String sql = "from KhuyenMai where Ten = :Ten";
@@ -220,6 +225,15 @@ public class KhuyenMaiRepository {
 
     }
 
+    public KhuyenMai getOne(int trangThai) {
+        String sql = fromTable + " where trangThai =: trangThai";
+        Query query = session.createQuery(sql, KhuyenMai.class);
+        query.setParameter("trangThai", trangThai);
+        return (KhuyenMai) query.getSingleResult();
+    }
+     
+     
+     
 
 }
 //>>>>>>> origin/Dev

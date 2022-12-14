@@ -80,6 +80,7 @@ com\poly\it17326\group3\service\ViewNhanVienService.class
 com\poly\it17326\group3\view\mainJFrame$6.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$14.class
 com\poly\it17326\group3\view\DoiMatKhauView$1.class
+com\poly\it17326\group3\view\KhuyenMaiJPanel$9.class
 com\poly\it17326\group3\repository\KhachHangRepository.class
 com\poly\it17326\group3\service\ViewKhuyenMaiService.class
 com\poly\it17326\group3\view\mainJFrame$3.class
@@ -234,6 +235,7 @@ com\poly\it17326\group3\service\ViewHoaDonService.class
 com\poly\it17326\group3\view\QuenMatKhau$4.class
 com\poly\it17326\group3\view\ChiTietSpJpanel$3.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$21.class
+com\poly\it17326\group3\view\ThongKeJPanel$12.class
 com\poly\it17326\group3\repository\HoaDonReposity.class
 com\poly\it17326\group3\view\DangNhapJPanel$4.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$17.class

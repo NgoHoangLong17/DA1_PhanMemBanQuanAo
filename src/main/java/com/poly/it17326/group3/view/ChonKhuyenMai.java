@@ -15,7 +15,7 @@ import com.poly.it17326.group3.service.impl.KhuyenMaiServiceImpl;
 public class ChonKhuyenMai {
     static ViewKhuyenMaiService khuyenMaiService = new KhuyenMaiServiceImpl();
 
-    public static KhuyenMai km = null;
+    public static KhuyenMai km = khuyenMaiService.getAll().get(0);
 
     public ChonKhuyenMai() {
 

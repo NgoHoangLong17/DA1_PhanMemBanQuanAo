@@ -4,7 +4,6 @@
  */
 package com.poly.it17326.group3.view;
 
-
 import com.poly.it17326.group3.repository.KhachHangRepository;
 
 import com.poly.it17326.group3.domainmodels.NhanVien;
@@ -38,7 +37,7 @@ public class mainJFrame extends javax.swing.JFrame {
         banHangJPanel = new BanHangJPanel();
         chiTietSpJpanel = new ChiTietSpJpanel();
         showPanel(banHangJPanel);
-//        banHangJPanel.initWebcam();
+        banHangJPanel.initWebcam();
         defaultHover();
         lblTenNV.setText(UserLogin.getNhanVien().getTenNhanVien());
         lblChucVu.setText(UserLogin.getNhanVien().getChucVu().getTenChucVu());
@@ -494,7 +493,6 @@ public class mainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         closeWebcam();
 
-
         showPanel(new KhuyenMaiJPanel());
 
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
@@ -518,17 +516,13 @@ public class mainJFrame extends javax.swing.JFrame {
 
     }
     private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
+
         closeWebcam();
-//        showPanel(banHangJPanel);
-        
-        
-        
-        
-        viewPanel.removeAll();
-        viewPanel.add(banHangJPanel);
-        viewPanel.revalidate();
-        viewPanel.repaint();
-//        banHangJPanel.initWebcam();
+        banHangJPanel = new BanHangJPanel();
+        showPanel(banHangJPanel);
+        banHangJPanel.initWebcam();
+
+
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
     private void btnThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseEntered
@@ -561,7 +555,6 @@ public class mainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         closeWebcam();
-
 
         showPanel(new NhanVienJPanel());
 
@@ -602,7 +595,7 @@ public class mainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         closeWebcam();
         this.dispose();
-        
+
         new DangNhapJFrame().setVisible(true);
     }//GEN-LAST:event_btnThongKe1ActionPerformed
 

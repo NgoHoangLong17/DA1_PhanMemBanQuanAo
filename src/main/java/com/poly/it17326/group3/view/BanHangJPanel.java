@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package com.poly.it17326.group3.view;
 
 import com.github.sarxos.webcam.Webcam;
@@ -94,7 +91,6 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         lblMaHD.setText("");
         loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(-1));
         autoKhuyenMai();
-        JOptionPane.showMessageDialog(this, "abc");
 //        load();
 
     }

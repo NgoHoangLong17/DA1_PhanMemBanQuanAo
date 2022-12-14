@@ -50,7 +50,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.poly.it17326.group3.domainmodels.KhachHang;
-import com.poly.it17326.group3.response.ExportFilePdf;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.logging.Level;

@@ -314,7 +314,7 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
             hdct.setDONGIA(ctsp.getGia());
             ctsp.setSoLuongTon(ctsp.getSoLuongTon() - sl);
             hoaDonChiTietService.save(hdct);
-
+            chiTietSPService.update(ctsp);
         } else {
             ChiTietSp ctsp = chiTietSPService.getOneByMaCtsp(maCtsp);
             HoaDonChiTiet hdct = hoaDonChiTietService.getHdctByIdCtspAndIdHd(ctsp.getId(), getIdHd());
@@ -322,6 +322,10 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
             if (soL < 0) {
                 JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ");
                 loadDataGioHang(hoaDonChiTietService.getHdctByIdHD(getIdHd()));
+                return;
+            }
+            if (soL > ctsp.getSoLuongTon()) {
+                JOptionPane.showMessageDialog(this, "Hàng trong kho còn: " + ctsp.getSoLuongTon());
                 return;
             }
 
@@ -1080,9 +1084,14 @@ public class BanHangJPanel extends javax.swing.JPanel implements Runnable, Threa
         ChonKhachHang.setKhachHang(hd.getKhachHang());
         if (hd.getTrangThai() == 1) {
             btnThanhToan.setEnabled(false);
-        }else{
+            tblCtsp.setEnabled(false);
+            tblHdct.setEnabled(false);
+        } else {
             btnThanhToan.setEnabled(true);
+            tblCtsp.setEnabled(true);
+            tblHdct.setEnabled(true);
         }
+
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void tblCtspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCtspMouseClicked

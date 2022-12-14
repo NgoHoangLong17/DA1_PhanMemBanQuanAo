@@ -22,7 +22,7 @@ public class Test extends javax.swing.JFrame {
 //    FrmHoaDonChiTiet1 fnv = new FrmHoaDonChiTiet();
 
 //        BanHangJPanel jPanel  = new BanHangJPanel(new NhanVien());
-      ThuocTinhSapPhamJfame ct = new ThuocTinhSapPhamJfame();
+      NhanVienJPanel ct = new NhanVienJPanel();
 
 //          ThuocTinhSanPhamJPanel fkm = new ThuocTinhSanPhamJPanel();
         jPanel1.removeAll();

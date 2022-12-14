@@ -29,7 +29,6 @@ com\poly\it17326\group3\view\KHJFrame$1.class
 com\poly\it17326\group3\service\ViewDoiMatKhauService.class
 com\poly\it17326\group3\domainmodels\HoaDonChiTiet.class
 com\poly\it17326\group3\view\ChiTietSpJpanel$12.class
-com\poly\it17326\group3\view\BanHangJPanel$17.class
 com\poly\it17326\group3\view\QuenMatKhau.class
 com\poly\it17326\group3\view\ChiTietSpJpanel$2.class
 com\poly\it17326\group3\view\mainJFrame$15.class
@@ -114,7 +113,6 @@ com\poly\it17326\group3\view\LichSuGiaoDichJPanel$3.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$13.class
 com\poly\it17326\group3\domainmodels\ChiTietSp.class
 com\poly\it17326\group3\view\ThuocTinhSapPhamJfame$2.class
-com\poly\it17326\group3\view\BanHangJPanel$16.class
 com\poly\it17326\group3\repository\GiaoCaReposity.class
 com\poly\it17326\group3\service\ViewHoaDonChiTietService.class
 com\poly\it17326\group3\view\ChiTietSpJpanel$13.class

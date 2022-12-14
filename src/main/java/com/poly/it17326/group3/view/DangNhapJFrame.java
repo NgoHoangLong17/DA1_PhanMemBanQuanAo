@@ -143,7 +143,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             }
         });
 
-        txtMatKhau.setText("123sdsafghfdfghj");
+        txtMatKhau.setText("123");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

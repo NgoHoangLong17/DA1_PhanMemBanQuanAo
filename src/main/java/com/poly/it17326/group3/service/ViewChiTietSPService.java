@@ -20,6 +20,8 @@ import java.util.List;
  */
 public interface ViewChiTietSPService {
 
+    ArrayList<ChiTietSp> getAllSanPhamLonHon0();
+
     public ArrayList<ChiTietSp> getAll();
 
     ChiTietSp getOneByMaCtsp(String ma);

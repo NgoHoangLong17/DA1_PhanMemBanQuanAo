@@ -85,4 +85,9 @@ public class ChiTietSpServiceImpl implements ViewChiTietSPService {
         return chiTietSpRepository.getOneByMaCtsp(ma);
     }
 
+    @Override
+    public ArrayList<ChiTietSp> getAllSanPhamLonHon0() {
+        return chiTietSpRepository.getAllSanPhamLonHon0();
+    }
+
 }

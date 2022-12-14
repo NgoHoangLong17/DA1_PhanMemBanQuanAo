@@ -41,6 +41,11 @@ public class ChiTietSpRepository {
         Query query = session.createQuery(fromTable);
         return (ArrayList<ChiTietSp>) query.getResultList();
     }
+    
+    public ArrayList<ChiTietSp> getAllSanPhamLonHon0() {
+        Query query = session.createQuery(fromTable+" where soLuongTon >0");
+        return (ArrayList<ChiTietSp>) query.getResultList();
+    }
 
     public ArrayList<ChiTietSp> getCheckTrung(int idsp, int iddongsp, int idmausac, int idchatlieu, int idsize, int idnsx) {
         Query query = session.createQuery(fromTable + "  where IDSP = :idsp and IDDONGSP =:iddongsp and "

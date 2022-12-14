@@ -561,7 +561,6 @@ public class mainJFrame extends javax.swing.JFrame {
             chiTietSpJpanel.initWebcam();
         }
         chiTietSpJpanel.initWebcam();
-
     }//GEN-LAST:event_btnQuanLySPActionPerformed
 
     /**

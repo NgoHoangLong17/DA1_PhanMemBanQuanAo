@@ -30,10 +30,10 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
 //        loadcbo();
     }
 
-    public void loadcbo() {
-        String items[] = {"Đang hoạt động", "Sắp diễn ra", "Đã hết hạn", "Đã hủy"};
-        cboTrangThai.setModel(new DefaultComboBoxModel<>(items));
-    }
+//    public void loadcbo() {
+//        String items[] = {"Đang hoạt động", "Sắp diễn ra", "Đã hết hạn", "Đã hủy"};
+//        cboTrangThai.setModel(new DefaultComboBoxModel<>(items));
+//    }
 
     private String doiNgay(Date d) {
         SimpleDateFormat format = new SimpleDateFormat();
@@ -460,7 +460,7 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
             if (ngayKT == null) {
                 sb.append("Không được để trống ngày kết thúc");
             }
-            if (ngayBD.getTime() >= ngayKT.getTime()) {
+            if (ngayBD.getTime() > ngayKT.getTime()) {
                 sb.append("Ngày kết thúc không hợp lệ\n");
             }
         } catch (Exception e) {
@@ -571,6 +571,11 @@ public class KhuyenMaiJPanel extends javax.swing.JPanel {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         int index = tblKhuyenMai.getSelectedRow();
+        if(index == -1){
+            JOptionPane.showMessageDialog(this, "Chọm chương trình muốn xóa");
+            return;
+        }
+    
         KhuyenMai khuyenMai = khuyenMaiService.getAll().get(index);
         if (khuyenMaiService.delete(khuyenMai)) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");

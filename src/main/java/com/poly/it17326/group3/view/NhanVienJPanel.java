@@ -21,6 +21,7 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -192,6 +193,16 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             if (ngaySinh == null) {
                 sb.append("Chưa nhập ngày sinh ").append("\n");
             }
+        } catch (Exception e) {
+        }
+        try {
+            LocalDate localDate = LocalDate.now();
+            int year = localDate.getYear();
+            int namSinh = this.txtNgaySinh.getDate().getYear() + 1900;
+            System.out.println(namSinh);
+            if (year - namSinh < 15) {
+                sb.append("Nhân viên không trong độ tuổi lao động").append("\n");
+            } 
         } catch (Exception e) {
         }
         if (txtSDT.getText().isEmpty()) {

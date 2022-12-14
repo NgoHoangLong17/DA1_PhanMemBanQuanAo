@@ -151,6 +151,8 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         } else {
             chekNghi.setSelected(false);
         }
+        txtCccd.setEnabled(false);
+        chekNghi.setEnabled(true);
     }
 
     private StringBuilder validator() {
@@ -248,12 +250,6 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         }
         if (txtSDT.getText().isEmpty()) {
             sb.append("Chưa nhập số điện thoại").append("\n");
-        } else {
-            for (NhanVien nhanVien : viewNhanVienService.getNhanVien()) {
-                if (nhanVien.getSDT().equals(txtSDT.getText())) {
-                    sb.append("SĐT đã được sử dụng").append("\n");
-                }
-            }
         }
         String checkSDT = "0\\d{9,10}";
         String checkSDT2 = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
@@ -344,7 +340,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tbNhanVien.setModel(new javax.swing.table.DefaultTableModel(
@@ -365,6 +361,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbNhanVien);
 
+        btnDau.setBackground(new java.awt.Color(255, 153, 51));
         btnDau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnDau.setText("|<<");
         btnDau.addActionListener(new java.awt.event.ActionListener() {
@@ -373,6 +370,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCuoi.setBackground(new java.awt.Color(255, 153, 51));
         btnCuoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCuoi.setText(">>|");
         btnCuoi.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +379,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnLui.setBackground(new java.awt.Color(255, 153, 51));
         btnLui.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLui.setText("<<");
         btnLui.addActionListener(new java.awt.event.ActionListener() {
@@ -389,6 +388,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btntien.setBackground(new java.awt.Color(255, 153, 51));
         btntien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btntien.setText(">>");
         btntien.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +405,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("Danh sách nhan viên");
+        jLabel2.setText("Danh sách nhân viên");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -453,7 +453,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setText("Tên nhân viên :");
@@ -462,7 +462,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Giới tính :");
 
-        jLabel6.setText("Ngày Sinh");
+        jLabel6.setText("Ngày Sinh :");
 
         buttonGroup1.add(rbnNam);
         rbnNam.setText("Nam");
@@ -472,7 +472,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel7.setText("SĐT:");
+        jLabel7.setText("SĐT :");
 
         jLabel8.setText("Địa chỉ :");
 
@@ -492,8 +492,9 @@ public class NhanVienJPanel extends javax.swing.JPanel {
 
         txtMaNV.setEditable(false);
 
-        jPanel4.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnNew.setBackground(new java.awt.Color(255, 153, 51));
         btnNew.setText("Làm mới bản ghi");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,6 +502,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(255, 153, 51));
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -508,6 +510,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnThem.setBackground(new java.awt.Color(255, 153, 51));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -515,6 +518,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnXuatFile.setBackground(new java.awt.Color(255, 153, 51));
         btnXuatFile.setText("Xuất file");
         btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -574,7 +578,7 @@ public class NhanVienJPanel extends javax.swing.JPanel {
                         .addComponent(rbnNu, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

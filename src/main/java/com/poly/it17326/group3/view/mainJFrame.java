@@ -38,7 +38,7 @@ public class mainJFrame extends javax.swing.JFrame {
         banHangJPanel = new BanHangJPanel();
         chiTietSpJpanel = new ChiTietSpJpanel();
         showPanel(banHangJPanel);
-        banHangJPanel.initWebcam();
+//        banHangJPanel.initWebcam();
         defaultHover();
         lblTenNV.setText(UserLogin.getNhanVien().getTenNhanVien());
         lblChucVu.setText(UserLogin.getNhanVien().getChucVu().getTenChucVu());
@@ -519,8 +519,16 @@ public class mainJFrame extends javax.swing.JFrame {
     }
     private void btnTrangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangChuActionPerformed
         closeWebcam();
-        showPanel(banHangJPanel);
-        banHangJPanel.initWebcam();
+//        showPanel(banHangJPanel);
+        
+        
+        
+        
+        viewPanel.removeAll();
+        viewPanel.add(banHangJPanel);
+        viewPanel.revalidate();
+        viewPanel.repaint();
+//        banHangJPanel.initWebcam();
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
     private void btnThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThongKeMouseEntered
@@ -571,7 +579,7 @@ public class mainJFrame extends javax.swing.JFrame {
 
     private void btnQuanLySPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLySPActionPerformed
 
-        showPanel(chiTietSpJpanel);
+        showPanel(new ChiTietSpJpanel1());
         closeWebcam();
 
 

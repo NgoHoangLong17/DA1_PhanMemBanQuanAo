@@ -34,6 +34,9 @@ public class KHJFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnIdentifiers(new Object[]{"Mã KH", "Tên", "Sdt", "Cấp bậc", "Địa chỉ"});
         for (KhachHang KhachHang : list) {
+            if (KhachHang.getId() == 1) {
+                continue;
+            }
             Object[] row = new Object[]{
                 KhachHang.getMa(), KhachHang.getTen(), KhachHang.getSdt(), KhachHang.capbac(), KhachHang.getDiaChi()
             };
@@ -186,7 +189,7 @@ public class KHJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -202,9 +205,9 @@ public class KHJFrame extends javax.swing.JFrame {
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
         // TODO add your handling code here:
-        String maKh= tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString();
+        String maKh = tblKhachHang.getValueAt(tblKhachHang.getSelectedRow(), 0).toString();
         for (KhachHang kh : khachHangService.getAll()) {
-            if(maKh.equals(kh.getMa())){
+            if (maKh.equals(kh.getMa())) {
                 ChonKhachHang.setKhachHang(kh);
                 this.dispose();
             }

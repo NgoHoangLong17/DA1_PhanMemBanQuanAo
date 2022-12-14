@@ -961,7 +961,7 @@ public class ThuocTinhSapPhamJfame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Xóa thất bại");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            JOptionPane.showMessageDialog(this, "Lien quan san pham chi tiet");
             e.printStackTrace();
         }
 

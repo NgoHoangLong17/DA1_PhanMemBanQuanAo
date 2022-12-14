@@ -24,7 +24,9 @@ public interface ViewChiTietSPService {
 
     public ArrayList<ChiTietSp> getAll();
 
+
     ChiTietSp getOneByMaCtsp(String ma);
+
 
     public List<SanPham> getSanPham();
 
@@ -44,5 +46,17 @@ public interface ViewChiTietSPService {
 
     public Boolean delete(ChiTietSp chiTietSp);
 
-    public ChiTietSp getOne(int id);
+    public ChiTietSp getOne(String id);
+
+    public ArrayList<ChiTietSp> getTimSp(int idsp);
+
+    public ArrayList<ChiTietSp> getTimDong(int iddongsp);
+
+    public ArrayList<ChiTietSp> getTimNsx(int idnsx);
+
+    public ArrayList<ChiTietSp> getTimMau(int idmausac);
+
+    public ArrayList<ChiTietSp> getTimChatLieu(int idchatlieu);
+
+    public ArrayList<ChiTietSp> getTimSize(int idsize);
 }
